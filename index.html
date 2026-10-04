@@ -1,0 +1,1407 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <meta name="theme-color" content="#080c0a">
+  <meta name="description" content="Mon étude du Coran — lire, écouter et étudier les 114 sourates du Coran.">
+
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mon Coran">
+
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Mon étude du Coran</title>
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <a href="#" class="brand" id="brandHome">
+    🕌 <span>Mon Coran</span>
+  </a>
+
+  <nav class="nav">
+    <a href="#" id="navHome">Accueil</a>
+    <a href="#sourates" id="navSourates">📖 Sourates</a>
+  </nav>
+
+</header>
+
+
+<main>
+
+  <!-- ACCUEIL -->
+
+  <section id="homeSection" class="home-section">
+
+    <div class="home-content">
+
+      <div class="bismillah">﷽</div>
+
+      <p class="eyebrow">
+        APPRENDRE • COMPRENDRE • PROGRESSER
+      </p>
+
+      <h1>Mon étude du Coran</h1>
+
+      <p class="home-description">
+        Un espace personnel pour découvrir les 114 sourates,
+        les lire, les écouter et progresser dans ton étude.
+      </p>
+
+      <div class="home-buttons">
+
+        <button class="primary-button" id="startButton" type="button">
+          📖 Commencer l’étude
+        </button>
+
+        <button class="secondary-button" id="progressButton" type="button">
+          ✅ Voir ma progression
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SOURATES -->
+
+  <section id="souratesSection" class="section sourates-section" hidden>
+
+    <div class="section-header">
+
+      <div>
+        <p class="eyebrow">LE CORAN</p>
+
+        <h2>Les 114 sourates</h2>
+
+        <p class="section-description">
+          Recherche, filtre et choisis une sourate pour commencer ta lecture.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="search-box">
+
+      <span>🔎</span>
+
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Rechercher une sourate..."
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <div class="filters">
+
+      <button class="filter-button active" data-filter="all" type="button">
+        Toutes
+      </button>
+
+      <button class="filter-button" data-filter="meccan" type="button">
+        🕋 Mecquoises
+      </button>
+
+      <button class="filter-button" data-filter="medinan" type="button">
+        🕌 Médinoises
+      </button>
+
+    </div>
+
+
+    <div class="sort-row">
+
+      <label for="sortSelect">
+        Trier par
+      </label>
+
+      <select id="sortSelect">
+
+        <option value="quran">
+          Ordre du Coran
+        </option>
+
+        <option value="chronological">
+          Ordre chronologique
+        </option>
+
+        <option value="length">
+          Longueur
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="results-count" id="resultsCount">
+      Chargement...
+    </div>
+
+
+    <div class="sourates-list" id="souratesList">
+
+      <div class="loading">
+        Chargement des sourates...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LECTEUR -->
+
+  <section id="readerSection" class="section reader-section" hidden>
+
+    <button class="back-button" id="backButton" type="button">
+      ← Retour aux sourates
+    </button>
+
+
+    <div class="reader-header">
+
+      <p class="reader-number" id="readerNumber">
+        Sourate
+      </p>
+
+      <h2 id="readerTitle">
+        Chargement...
+      </h2>
+
+      <p class="reader-arabic-title" id="readerArabicTitle"></p>
+
+      <p class="reader-info" id="readerInfo"></p>
+
+    </div>
+
+
+    <!-- AUDIO -->
+
+    <div class="audio-card">
+
+      <div class="audio-top">
+
+        <div>
+          <p class="audio-label">🎧 RÉCITATION</p>
+
+          <strong>
+            Mishary Rashid Alafasy
+          </strong>
+        </div>
+
+        <button
+          class="repeat-button"
+          id="repeatButton"
+          type="button"
+        >
+          🔁
+        </button>
+
+      </div>
+
+
+      <audio
+        id="audioPlayer"
+        controls
+        preload="metadata"
+      ></audio>
+
+
+      <div class="audio-controls">
+
+        <button
+          class="play-button"
+          id="playButton"
+          type="button"
+        >
+          ▶️ Lire
+        </button>
+
+        <button
+          class="restart-button"
+          id="restartButton"
+          type="button"
+        >
+          ↺ Recommencer
+        </button>
+
+      </div>
+
+
+      <div class="audio-status" id="audioStatus">
+        Prêt à écouter
+      </div>
+
+    </div>
+
+
+    <!-- AFFICHAGE -->
+
+    <div class="display-card">
+
+      <div class="display-card-header">
+
+        <div>
+          <p class="audio-label">📖 AFFICHAGE</p>
+
+          <strong>
+            Choisir la langue
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="display-buttons">
+
+        <button
+          class="display-button active"
+          data-mode="both"
+          type="button"
+        >
+          Arabe + Français
+        </button>
+
+        <button
+          class="display-button"
+          data-mode="arabic"
+          type="button"
+        >
+          Arabe
+        </button>
+
+        <button
+          class="display-button"
+          data-mode="french"
+          type="button"
+        >
+          Français
+        </button>
+
+        <button
+          class="display-button"
+          data-mode="phonetic"
+          type="button"
+        >
+          Phonétique
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="reader-bismillah" id="readerBismillah">
+      ﷽
+    </div>
+
+
+    <div class="ayahs" id="ayahsContainer">
+
+      <div class="loading">
+        Chargement de la sourate...
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+const API = "https://api.alquran.cloud/v1";
+const AUDIO_EDITION = "ar.alafasy";
+
+let sourates = [];
+let currentSourate = null;
+let currentAyahs = [];
+let currentAyahIndex = 0;
+let currentDisplayMode = "both";
+let repeatSourate = false;
+
+
+/* NOMS */
+
+const frenchNames = {
+  1:"Al-Fatiha",
+  2:"Al-Baqara",
+  3:"Al-Imran",
+  4:"An-Nisa",
+  5:"Al-Ma'idah",
+  6:"Al-An'am",
+  7:"Al-A'raf",
+  8:"Al-Anfal",
+  9:"At-Tawbah",
+  10:"Yunus",
+  11:"Hud",
+  12:"Yusuf",
+  13:"Ar-Ra'd",
+  14:"Ibrahim",
+  15:"Al-Hijr",
+  16:"An-Nahl",
+  17:"Al-Isra",
+  18:"Al-Kahf",
+  19:"Maryam",
+  20:"Ta-Ha",
+  21:"Al-Anbiya",
+  22:"Al-Hajj",
+  23:"Al-Mu'minun",
+  24:"An-Nur",
+  25:"Al-Furqan",
+  26:"Ash-Shu'ara",
+  27:"An-Naml",
+  28:"Al-Qasas",
+  29:"Al-Ankabut",
+  30:"Ar-Rum",
+  31:"Luqman",
+  32:"As-Sajda",
+  33:"Al-Ahzab",
+  34:"Saba",
+  35:"Fatir",
+  36:"Ya-Sin",
+  37:"As-Saffat",
+  38:"Sad",
+  39:"Az-Zumar",
+  40:"Ghafir",
+  41:"Fussilat",
+  42:"Ash-Shura",
+  43:"Az-Zukhruf",
+  44:"Ad-Dukhan",
+  45:"Al-Jathiya",
+  46:"Al-Ahqaf",
+  47:"Muhammad",
+  48:"Al-Fath",
+  49:"Al-Hujurat",
+  50:"Qaf",
+  51:"Adh-Dhariyat",
+  52:"At-Tur",
+  53:"An-Najm",
+  54:"Al-Qamar",
+  55:"Ar-Rahman",
+  56:"Al-Waqi'a",
+  57:"Al-Hadid",
+  58:"Al-Mujadila",
+  59:"Al-Hashr",
+  60:"Al-Mumtahanah",
+  61:"As-Saff",
+  62:"Al-Jumu'a",
+  63:"Al-Munafiqun",
+  64:"At-Taghabun",
+  65:"At-Talaq",
+  66:"At-Tahrim",
+  67:"Al-Mulk",
+  68:"Al-Qalam",
+  69:"Al-Haqqah",
+  70:"Al-Ma'arij",
+  71:"Nuh",
+  72:"Al-Jinn",
+  73:"Al-Muzzammil",
+  74:"Al-Muddaththir",
+  75:"Al-Qiyamah",
+  76:"Al-Insan",
+  77:"Al-Mursalat",
+  78:"An-Naba",
+  79:"An-Nazi'at",
+  80:"Abasa",
+  81:"At-Takwir",
+  82:"Al-Infitar",
+  83:"Al-Mutaffifin",
+  84:"Al-Inshiqaq",
+  85:"Al-Buruj",
+  86:"At-Tariq",
+  87:"Al-A'la",
+  88:"Al-Ghashiyah",
+  89:"Al-Fajr",
+  90:"Al-Balad",
+  91:"Ash-Shams",
+  92:"Al-Layl",
+  93:"Ad-Duha",
+  94:"Ash-Sharh",
+  95:"At-Tin",
+  96:"Al-Alaq",
+  97:"Al-Qadr",
+  98:"Al-Bayyinah",
+  99:"Az-Zalzalah",
+  100:"Al-Adiyat",
+  101:"Al-Qari'a",
+  102:"At-Takathur",
+  103:"Al-Asr",
+  104:"Al-Humazah",
+  105:"Al-Fil",
+  106:"Quraysh",
+  107:"Al-Ma'un",
+  108:"Al-Kawthar",
+  109:"Al-Kafirun",
+  110:"An-Nasr",
+  111:"Al-Masad",
+  112:"Al-Ikhlas",
+  113:"Al-Falaq",
+  114:"An-Nas"
+};
+
+
+/* ORDRE CHRONOLOGIQUE */
+
+const chronologicalOrder = [
+  96,68,73,74,1,111,81,87,92,89,
+  93,94,103,100,108,102,107,109,105,113,
+  114,112,53,80,97,91,85,95,106,101,
+  75,104,77,50,90,86,54,38,7,72,
+  36,25,35,19,20,56,26,27,28,17,
+  10,11,12,15,6,37,31,34,39,40,
+  41,42,43,44,45,46,51,88,18,16,
+  71,14,21,23,32,52,67,69,70,78,
+  79,82,84,30,29,83,2,8,3,33,
+  60,4,99,57,47,13,55,76,65,98,
+  59,24,22,63,58,49,66,64,61,62,
+  48,5,9,110
+];
+
+
+/* ELEMENTS */
+
+const homeSection = document.getElementById("homeSection");
+const souratesSection = document.getElementById("souratesSection");
+const readerSection = document.getElementById("readerSection");
+
+const souratesList = document.getElementById("souratesList");
+const resultsCount = document.getElementById("resultsCount");
+const searchInput = document.getElementById("searchInput");
+const sortSelect = document.getElementById("sortSelect");
+
+const readerTitle = document.getElementById("readerTitle");
+const readerNumber = document.getElementById("readerNumber");
+const readerArabicTitle = document.getElementById("readerArabicTitle");
+const readerInfo = document.getElementById("readerInfo");
+
+const ayahsContainer = document.getElementById("ayahsContainer");
+const audioPlayer = document.getElementById("audioPlayer");
+
+const playButton = document.getElementById("playButton");
+const restartButton = document.getElementById("restartButton");
+const repeatButton = document.getElementById("repeatButton");
+const audioStatus = document.getElementById("audioStatus");
+
+const readerBismillah =
+  document.getElementById("readerBismillah");
+
+
+/* AFFICHAGE */
+
+function showHome() {
+
+  homeSection.hidden = false;
+  souratesSection.hidden = true;
+  readerSection.hidden = true;
+
+  window.scrollTo(0, 0);
+}
+
+
+function showSourates() {
+
+  homeSection.hidden = true;
+  souratesSection.hidden = false;
+  readerSection.hidden = true;
+
+  window.scrollTo(0, 0);
+}
+
+
+/* SOURATES */
+
+async function loadSourates() {
+
+  try {
+
+    const response = await fetch(`${API}/surah`);
+
+    if (!response.ok) {
+      throw new Error("Erreur API");
+    }
+
+    const data = await response.json();
+
+    sourates = data.data;
+
+    displaySourates();
+
+  } catch (error) {
+
+    console.error(error);
+
+    souratesList.innerHTML = `
+      <div class="error-message">
+        Impossible de charger les sourates.
+        <br>
+        Vérifie ta connexion internet.
+      </div>
+    `;
+
+    resultsCount.textContent = "";
+
+  }
+}
+
+
+function displaySourates() {
+
+  const search =
+    searchInput.value.trim().toLowerCase();
+
+  const filter =
+    document.querySelector(
+      ".filter-button.active"
+    )?.dataset.filter || "all";
+
+  const sort = sortSelect.value;
+
+  let filtered = [...sourates];
+
+
+  if (search) {
+
+    filtered = filtered.filter(s => {
+
+      const french =
+        frenchNames[s.number] || "";
+
+      return (
+        s.name.toLowerCase().includes(search) ||
+        s.englishName.toLowerCase().includes(search) ||
+        french.toLowerCase().includes(search) ||
+        String(s.number).includes(search)
+      );
+
+    });
+
+  }
+
+
+  if (filter === "meccan") {
+
+    filtered = filtered.filter(
+      s => s.revelationType === "Meccan"
+    );
+
+  }
+
+
+  if (filter === "medinan") {
+
+    filtered = filtered.filter(
+      s => s.revelationType === "Medinan"
+    );
+
+  }
+
+
+  if (sort === "length") {
+
+    filtered.sort(
+      (a,b) => b.numberOfAyahs - a.numberOfAyahs
+    );
+
+  }
+
+
+  if (sort === "chronological") {
+
+    const positions = {};
+
+    chronologicalOrder.forEach(
+      (number,index) => {
+        positions[number] = index;
+      }
+    );
+
+    filtered.sort(
+      (a,b) =>
+        positions[a.number] - positions[b.number]
+    );
+
+  }
+
+
+  if (sort === "quran") {
+
+    filtered.sort(
+      (a,b) => a.number - b.number
+    );
+
+  }
+
+
+  resultsCount.textContent =
+    `${filtered.length} sourate${filtered.length > 1 ? "s" : ""}`;
+
+
+  souratesList.innerHTML = "";
+
+
+  if (!filtered.length) {
+
+    souratesList.innerHTML = `
+      <div class="empty-message">
+        <strong>Aucune sourate trouvée</strong>
+        <p>Essaie une autre recherche.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  filtered.forEach(s => {
+
+    souratesList.appendChild(
+      createSourateCard(s)
+    );
+
+  });
+
+}
+
+
+function createSourateCard(sourate) {
+
+  const card =
+    document.createElement("button");
+
+  card.type = "button";
+  card.className = "sourate-card";
+
+
+  const french =
+    frenchNames[sourate.number] ||
+    sourate.englishName;
+
+  const revelation =
+    sourate.revelationType === "Meccan"
+      ? "Mecquoise"
+      : "Médinoise";
+
+  const icon =
+    sourate.revelationType === "Meccan"
+      ? "🕋"
+      : "🕌";
+
+
+  card.innerHTML = `
+
+    <span class="sourate-number">
+      ${sourate.number}
+    </span>
+
+    <span class="sourate-main">
+
+      <span class="sourate-french">
+        ${french}
+      </span>
+
+      <span class="sourate-phonetic">
+        ${sourate.englishName}
+      </span>
+
+      <span class="sourate-meta">
+        ${icon}
+        ${revelation}
+        •
+        ${sourate.numberOfAyahs} versets
+      </span>
+
+    </span>
+
+    <span class="sourate-arabic">
+      ${sourate.name}
+    </span>
+
+    <span class="sourate-arrow">
+      →
+    </span>
+
+  `;
+
+
+  card.addEventListener(
+    "click",
+    () => openSourate(sourate.number)
+  );
+
+
+  return card;
+}
+
+
+/* OUVERTURE SOURATE */
+
+async function openSourate(number) {
+
+  showReaderLoading();
+
+  try {
+
+    const [
+      arabicResponse,
+      frenchResponse,
+      phoneticResponse,
+      audioResponse
+    ] = await Promise.all([
+
+      fetch(`${API}/surah/${number}/quran-uthmani`),
+
+      fetch(`${API}/surah/${number}/fr.hamidullah`),
+
+      fetch(`${API}/surah/${number}/en.transliteration`),
+
+      fetch(`${API}/surah/${number}/${AUDIO_EDITION}`)
+
+    ]);
+
+
+    const arabicData =
+      arabicResponse.ok
+        ? await arabicResponse.json()
+        : null;
+
+    const frenchData =
+      frenchResponse.ok
+        ? await frenchResponse.json()
+        : null;
+
+    const phoneticData =
+      phoneticResponse.ok
+        ? await phoneticResponse.json()
+        : null;
+
+    const audioData =
+      audioResponse.ok
+        ? await audioResponse.json()
+        : null;
+
+
+    if (!arabicData?.data) {
+      throw new Error("Texte arabe indisponible");
+    }
+
+
+    currentSourate =
+      arabicData.data;
+
+
+    const arabicAyahs =
+      arabicData.data.ayahs || [];
+
+    const frenchAyahs =
+      frenchData?.data?.ayahs || [];
+
+    const phoneticAyahs =
+      phoneticData?.data?.ayahs || [];
+
+    const audioAyahs =
+      audioData?.data?.ayahs || [];
+
+
+    currentAyahs =
+      arabicAyahs.map((ayah,index) => ({
+
+        number: ayah.number,
+
+        numberInSurah:
+          ayah.numberInSurah,
+
+        arabic:
+          ayah.text,
+
+        french:
+          frenchAyahs[index]?.text || "",
+
+        transliteration:
+          phoneticAyahs[index]?.text || "",
+
+        audio:
+          audioAyahs[index]?.audio || null
+
+      }));
+
+
+    currentAyahIndex = 0;
+
+
+    readerNumber.textContent =
+      `Sourate ${number}`;
+
+    readerTitle.textContent =
+      frenchNames[number] ||
+      currentSourate.englishName;
+
+    readerArabicTitle.textContent =
+      currentSourate.name;
+
+    readerInfo.textContent =
+      `${currentSourate.revelationType === "Meccan" ? "Mecquoise" : "Médinoise"} • ${currentSourate.numberOfAyahs} versets`;
+
+
+    readerBismillah.hidden =
+      number === 9;
+
+
+    renderAyahs();
+
+    loadCurrentAyah();
+
+    audioStatus.textContent =
+      "Prêt à écouter";
+
+
+  } catch(error) {
+
+    console.error(error);
+
+    ayahsContainer.innerHTML = `
+      <div class="error-message">
+        <strong>Impossible de charger cette sourate.</strong>
+        <p>Vérifie ta connexion internet.</p>
+      </div>
+    `;
+
+    audioStatus.textContent =
+      "Erreur de chargement";
+
+  }
+}
+
+
+function showReaderLoading() {
+
+  homeSection.hidden = true;
+  souratesSection.hidden = true;
+  readerSection.hidden = false;
+
+  window.scrollTo(0, 0);
+
+  readerTitle.textContent =
+    "Chargement...";
+
+  readerArabicTitle.textContent = "";
+  readerInfo.textContent = "";
+
+  ayahsContainer.innerHTML = `
+    <div class="loading">
+      Chargement de la sourate...
+    </div>
+  `;
+
+  audioPlayer.pause();
+  audioPlayer.removeAttribute("src");
+  audioPlayer.load();
+
+  playButton.textContent =
+    "▶️ Lire";
+
+}
+
+
+/* VERSETS */
+
+function renderAyahs() {
+
+  ayahsContainer.innerHTML = "";
+
+
+  currentAyahs.forEach((ayah,index) => {
+
+    const article =
+      document.createElement("article");
+
+    article.className = "ayah";
+
+    article.dataset.index = index;
+
+
+    const number =
+      document.createElement("div");
+
+    number.className = "ayah-number";
+
+    number.textContent =
+      ayah.numberInSurah;
+
+
+    const content =
+      document.createElement("div");
+
+    content.className =
+      "ayah-content";
+
+
+    if (
+      currentDisplayMode === "both" ||
+      currentDisplayMode === "arabic"
+    ) {
+
+      const arabic =
+        document.createElement("div");
+
+      arabic.className =
+        "ayah-arabic";
+
+      arabic.dir = "rtl";
+
+      arabic.textContent =
+        ayah.arabic;
+
+      content.appendChild(arabic);
+
+    }
+
+
+    if (
+      currentDisplayMode === "both" ||
+      currentDisplayMode === "french"
+    ) {
+
+      const french =
+        document.createElement("div");
+
+      french.className =
+        "ayah-french";
+
+      french.textContent =
+        ayah.french ||
+        "Traduction indisponible.";
+
+      content.appendChild(french);
+
+    }
+
+
+    if (
+      currentDisplayMode === "phonetic"
+    ) {
+
+      const phonetic =
+        document.createElement("div");
+
+      phonetic.className =
+        "ayah-phonetic";
+
+      phonetic.textContent =
+        ayah.transliteration ||
+        "Phonétique indisponible.";
+
+      content.appendChild(phonetic);
+
+    }
+
+
+    article.appendChild(number);
+    article.appendChild(content);
+
+
+    article.addEventListener(
+      "click",
+      () => {
+
+        currentAyahIndex = index;
+
+        loadCurrentAyah();
+
+        playAudio();
+
+      }
+    );
+
+
+    ayahsContainer.appendChild(article);
+
+  });
+
+}
+
+
+/* AUDIO */
+
+function loadCurrentAyah() {
+
+  if (!currentAyahs.length) {
+    return;
+  }
+
+
+  const ayah =
+    currentAyahs[currentAyahIndex];
+
+
+  if (ayah.audio) {
+
+    audioPlayer.src =
+      ayah.audio;
+
+  } else {
+
+    audioPlayer.src =
+      `https://cdn.islamic.network/quran/audio/128/ar.alafasy/${ayah.number}.mp3`;
+
+  }
+
+
+  audioPlayer.load();
+
+
+  document
+    .querySelectorAll(".ayah")
+    .forEach(el =>
+      el.classList.remove("active")
+    );
+
+
+  const current =
+    document.querySelector(
+      `.ayah[data-index="${currentAyahIndex}"]`
+    );
+
+
+  if (current) {
+
+    current.classList.add("active");
+
+    current.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+  }
+
+
+  audioStatus.textContent =
+    `Verset ${ayah.numberInSurah} / ${currentAyahs.length}`;
+}
+
+
+function playAudio() {
+
+  if (!audioPlayer.src) {
+    return;
+  }
+
+  audioPlayer
+    .play()
+    .then(() => {
+
+      playButton.textContent =
+        "⏸️ Pause";
+
+    })
+    .catch(error => {
+
+      console.error(error);
+
+    });
+}
+
+
+function pauseAudio() {
+
+  audioPlayer.pause();
+
+  playButton.textContent =
+    "▶️ Lire";
+}
+
+
+playButton.addEventListener(
+  "click",
+  () => {
+
+    if (audioPlayer.paused) {
+      playAudio();
+    } else {
+      pauseAudio();
+    }
+
+  }
+);
+
+
+restartButton.addEventListener(
+  "click",
+  () => {
+
+    audioPlayer.currentTime = 0;
+
+    playAudio();
+
+  }
+);
+
+
+repeatButton.addEventListener(
+  "click",
+  () => {
+
+    repeatSourate =
+      !repeatSourate;
+
+    repeatButton.classList.toggle(
+      "active",
+      repeatSourate
+    );
+
+  }
+);
+
+
+/* FIN AUDIO */
+
+audioPlayer.addEventListener(
+  "ended",
+  () => {
+
+    if (
+      currentAyahIndex <
+      currentAyahs.length - 1
+    ) {
+
+      currentAyahIndex++;
+
+      loadCurrentAyah();
+
+      playAudio();
+
+      return;
+    }
+
+
+    if (repeatSourate) {
+
+      currentAyahIndex = 0;
+
+      loadCurrentAyah();
+
+      playAudio();
+
+      return;
+    }
+
+
+    playButton.textContent =
+      "▶️ Lire";
+
+    audioStatus.textContent =
+      "Sourate terminée";
+
+  }
+);
+
+
+/* AFFICHAGE */
+
+document
+  .querySelectorAll(".display-button")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".display-button")
+          .forEach(btn =>
+            btn.classList.remove("active")
+          );
+
+        button.classList.add("active");
+
+        currentDisplayMode =
+          button.dataset.mode;
+
+        renderAyahs();
+
+        const current =
+          document.querySelector(
+            `.ayah[data-index="${currentAyahIndex}"]`
+          );
+
+        if (current) {
+          current.classList.add("active");
+        }
+
+      }
+    );
+
+  });
+
+
+/* FILTRES */
+
+document
+  .querySelectorAll(".filter-button")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".filter-button")
+          .forEach(btn =>
+            btn.classList.remove("active")
+          );
+
+        button.classList.add("active");
+
+        displaySourates();
+
+      }
+    );
+
+  });
+
+
+/* RECHERCHE */
+
+searchInput.addEventListener(
+  "input",
+  displaySourates
+);
+
+
+/* TRI */
+
+sortSelect.addEventListener(
+  "change",
+  displaySourates
+);
+
+
+/* NAVIGATION */
+
+document
+  .getElementById("startButton")
+  .addEventListener(
+    "click",
+    showSourates
+  );
+
+
+document
+  .getElementById("navSourates")
+  .addEventListener(
+    "click",
+    event => {
+
+      event.preventDefault();
+
+      showSourates();
+
+    }
+  );
+
+
+document
+  .getElementById("navHome")
+  .addEventListener(
+    "click",
+    event => {
+
+      event.preventDefault();
+
+      showHome();
+
+    }
+  );
+
+
+document
+  .getElementById("brandHome")
+  .addEventListener(
+    "click",
+    event => {
+
+      event.preventDefault();
+
+      showHome();
+
+    }
+  );
+
+
+document
+  .getElementById("backButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      audioPlayer.pause();
+
+      showSourates();
+
+    }
+  );
+
+
+document
+  .getElementById("progressButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      alert(
+        "La progression sera disponible prochainement."
+      );
+
+    }
+  );
+
+
+/* PWA */
+
+if ("serviceWorker" in navigator) {
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register("./sw.js")
+        .catch(error =>
+          console.error(
+            "Service Worker :",
+            error
+          )
+        );
+
+    }
+  );
+
+}
+
+
+/* DÉMARRAGE */
+
+loadSourates();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "Mon étude du Coran",
+  "short_name": "Mon Coran",
+  "description": "Lire, écouter et étudier les 114 sourates du Coran.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080c0a",
+  "theme_color": "#080c0a",
+
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
