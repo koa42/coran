@@ -48,6 +48,9 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+
+  /* Prise en compte de l'encoche / Dynamic Island */
+  padding-top: env(safe-area-inset-top);
 }
 
 button,
@@ -67,32 +70,53 @@ button {
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 9999;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  padding: 14px 20px;
+
+  padding:
+    14px
+    max(20px, env(safe-area-inset-right))
+    14px
+    max(20px, env(safe-area-inset-left));
 
   background: rgba(8, 12, 10, 0.88);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
   border-bottom: 1px solid var(--border);
 }
 
 .brand {
+  position: relative;
+  z-index: 10000;
+
   flex-shrink: 0;
+
   color: var(--white);
   text-decoration: none;
+
   font-size: 17px;
   font-weight: 800;
+
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav {
+  position: relative;
+  z-index: 10000;
+
   display: flex;
   gap: 8px;
+
   overflow-x: auto;
   scrollbar-width: none;
+
+  touch-action: pan-x;
 }
 
 .nav::-webkit-scrollbar {
@@ -100,15 +124,32 @@ button {
 }
 
 .nav a {
+  position: relative;
+  z-index: 10001;
+
   flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+
   color: var(--muted);
   text-decoration: none;
+
   padding: 8px 10px;
+
   border-radius: 10px;
+
   font-size: 14px;
+
   transition:
     color 0.2s,
     background 0.2s;
+
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav a:hover {
@@ -795,8 +836,6 @@ audio {
   gap: 10px;
 }
 
-/* Carte d'un dossier */
-
 .folder-card {
   width: 100%;
 
@@ -883,8 +922,6 @@ audio {
   font-size: 20px;
 }
 
-/* En-tête d'un dossier ouvert */
-
 .folder-detail-header {
   display: flex;
   align-items: flex-start;
@@ -916,8 +953,6 @@ audio {
   font-size: 13px;
 }
 
-/* Bouton supprimer dossier */
-
 .folder-delete-button {
   flex-shrink: 0;
 
@@ -943,7 +978,7 @@ audio {
 }
 
 /* =========================================================
-   VERSETS SAUVEGARDÉS DANS UN DOSSIER
+   VERSETS SAUVEGARDÉS
    ========================================================= */
 
 .saved-verse {
@@ -1068,7 +1103,7 @@ audio {
 }
 
 /* =========================================================
-   CRÉATION DE DOSSIER
+   CRÉATION DOSSIER
    ========================================================= */
 
 .create-folder-card {
@@ -1137,6 +1172,7 @@ audio {
   background: rgba(0, 0, 0, 0.72);
 
   backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
 }
 
 .modal-backdrop[hidden] {
@@ -1204,8 +1240,6 @@ audio {
   background: var(--surface-3);
 }
 
-/* Liste des choix de dossiers */
-
 .folder-choices {
   display: grid;
   gap: 8px;
@@ -1269,8 +1303,6 @@ audio {
   font-size: 11px;
 }
 
-/* Création depuis la modale */
-
 .new-folder-title {
   margin: 0 0 9px;
 
@@ -1330,8 +1362,6 @@ audio {
   background: var(--green-light);
 }
 
-/* Bouton enregistrer */
-
 .modal-save-button {
   width: 100%;
 
@@ -1352,7 +1382,7 @@ audio {
 }
 
 /* =========================================================
-   ÉTAT VIDE DOSSIER
+   ÉTAT VIDE
    ========================================================= */
 
 .folder-empty {
@@ -1423,7 +1453,7 @@ audio {
 }
 
 /* =========================================================
-   PETITES NOTIFICATIONS
+   TOAST
    ========================================================= */
 
 .toast {
@@ -1466,25 +1496,68 @@ audio {
 
 @media (max-width: 600px) {
 
+  /*
+   * SUR IPHONE :
+   * on met le logo au-dessus de la navigation.
+   * Cela évite que les boutons soient compressés
+   * ou placés sous la zone de l'encoche / Dynamic Island.
+   */
+
   .topbar {
-    padding: 12px 14px;
+    position: sticky;
+    top: 0;
+
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding-top: 10px;
+    padding-right: max(14px, env(safe-area-inset-right));
+    padding-bottom: 8px;
+    padding-left: max(14px, env(safe-area-inset-left));
   }
 
   .brand {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 32px;
+
     font-size: 15px;
   }
 
   .nav {
-    max-width: 65vw;
-    gap: 2px;
+    width: 100%;
+    max-width: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 4px;
+
+    overflow-x: auto;
+
+    padding-bottom: 2px;
   }
 
   .nav a {
-    padding: 7px 8px;
+    min-height: 42px;
+
+    padding:
+      7px
+      9px;
+
     font-size: 12px;
   }
 
   .home-section {
+    min-height: calc(100vh - 110px);
+
     padding:
       35px
       16px
@@ -1651,7 +1724,7 @@ audio {
 
   .nav a {
     font-size: 11px;
-    padding: 7px 6px;
+    padding: 7px 8px;
   }
 
   .display-button {
@@ -1690,7 +1763,7 @@ select:focus-visible {
 }
 
 /* =========================================================
-   SÉLECTION DU TEXTE
+   SÉLECTION
    ========================================================= */
 
 ::selection {
