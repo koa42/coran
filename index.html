@@ -5,42 +5,42 @@
 <head>
   <meta charset="utf-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1, viewport-fit=cover"
->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
 
-<meta
-name="theme-color"
-content="#080c0a"
->
+  <meta
+    name="theme-color"
+    content="#080c0a"
+  >
 
-<meta
-name="description"
-content="Mon étude du Coran — lire, écouter et étudier les 114 sourates du Coran."
->
+  <meta
+    name="description"
+    content="Mon étude du Coran — lire, écouter et étudier les 114 sourates du Coran."
+  >
 
   <link rel="manifest" href="manifest.json">
 
-<meta
-name="mobile-web-app-capable"
-content="yes"
->
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
 
-<meta
-name="apple-mobile-web-app-capable"
-content="yes"
->
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
 
-<meta
-name="apple-mobile-web-app-status-bar-style"
-content="black-translucent"
->
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
 
-<meta
-name="apple-mobile-web-app-title"
-content="Mon Coran"
->
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Mon Coran"
+  >
 
   <link
     rel="apple-touch-icon"
@@ -54,21 +54,275 @@ content="Mon Coran"
 
   <title>Mon étude du Coran</title>
 
-<style>
-.resume-card{display:flex;align-items:center;gap:14px;margin:28px auto 0;padding:15px;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:16px;max-width:680px}
-.resume-card-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:12px;background:var(--surface-3);color:var(--green-light)}
-.resume-card-content{min-width:0;flex:1;display:flex;flex-direction:column;gap:3px}
-.resume-label{margin:0;color:var(--green);font-size:10px;font-weight:900;letter-spacing:.12em}
-.resume-card-content strong{color:var(--white);font-size:15px}.resume-card-content span{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.resume-button{flex-shrink:0;padding:10px 13px;border:0;border-radius:10px;background:var(--green);color:#08100b;font-weight:800}
-.known-surah{display:flex;align-items:center;gap:10px;width:max-content;max-width:100%;margin-top:13px;padding:10px 12px;border:1px solid var(--border);border-radius:11px;background:var(--surface);color:var(--muted);font-size:13px;cursor:pointer}
-.known-surah input{width:18px;height:18px;margin:0;accent-color:var(--green);cursor:pointer}
-.sourate-known{display:inline-flex;align-items:center;margin-left:7px;padding:3px 6px;border-radius:7px;background:rgba(121,200,154,.12);color:var(--green-light);font-size:10px;font-weight:800}
-.mini-player{position:fixed;left:50%;bottom:14px;z-index:900;width:min(680px,calc(100% - 24px));transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:10px 11px;background:rgba(18,26,22,.96);border:1px solid var(--border);border-radius:16px;box-shadow:0 14px 45px rgba(0,0,0,.35);backdrop-filter:blur(14px)}
-.mini-player-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}.mini-player-label{color:var(--green);font-size:9px;font-weight:900;letter-spacing:.1em}.mini-player-info strong{color:var(--white);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mini-player-info span:last-child{color:var(--muted);font-size:11px}
-.mini-player-button,.mini-player-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--border);border-radius:10px;background:var(--surface-2);color:var(--text)}.mini-play-button{background:var(--green);border-color:var(--green);color:#07100a;font-weight:800}.mini-player-close{font-size:20px;color:var(--muted)}
-@media(max-width:600px){.resume-card{align-items:flex-start}.resume-button{margin-left:auto}.mini-player{bottom:calc(10px + env(safe-area-inset-bottom));width:calc(100% - 16px)}.known-surah{width:100%}}
-</style>
+  <style>
+    .resume-card{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin:28px auto 0;
+      padding:15px;
+      text-align:left;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:16px;
+      max-width:680px
+    }
+
+    .resume-card-icon{
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      border-radius:12px;
+      background:var(--surface-3);
+      color:var(--green-light)
+    }
+
+    .resume-card-content{
+      min-width:0;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:3px
+    }
+
+    .resume-label{
+      margin:0;
+      color:var(--green);
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.12em
+    }
+
+    .resume-card-content strong{
+      color:var(--white);
+      font-size:15px
+    }
+
+    .resume-card-content span{
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis
+    }
+
+    .resume-button{
+      flex-shrink:0;
+      padding:10px 13px;
+      border:0;
+      border-radius:10px;
+      background:var(--green);
+      color:#08100b;
+      font-weight:800
+    }
+
+    .known-surah{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      width:max-content;
+      max-width:100%;
+      margin-top:13px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:var(--surface);
+      color:var(--muted);
+      font-size:13px;
+      cursor:pointer
+    }
+
+    .known-surah input{
+      width:18px;
+      height:18px;
+      margin:0;
+      accent-color:var(--green);
+      cursor:pointer
+    }
+
+    .sourate-known{
+      display:inline-flex;
+      align-items:center;
+      margin-left:7px;
+      padding:3px 6px;
+      border-radius:7px;
+      background:rgba(121,200,154,.12);
+      color:var(--green-light);
+      font-size:10px;
+      font-weight:800
+    }
+
+    .mini-player{
+      position:fixed;
+      left:50%;
+      bottom:14px;
+      z-index:900;
+      width:min(680px,calc(100% - 24px));
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 11px;
+      background:rgba(18,26,22,.96);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 14px 45px rgba(0,0,0,.35);
+      backdrop-filter:blur(14px)
+    }
+
+    .mini-player-info{
+      min-width:0;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:2px
+    }
+
+    .mini-player-label{
+      color:var(--green);
+      font-size:9px;
+      font-weight:900;
+      letter-spacing:.1em
+    }
+
+    .mini-player-info strong{
+      color:var(--white);
+      font-size:13px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis
+    }
+
+    .mini-player-info span:last-child{
+      color:var(--muted);
+      font-size:11px
+    }
+
+    .mini-player-button,
+    .mini-player-close{
+      width:36px;
+      height:36px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:var(--surface-2);
+      color:var(--text)
+    }
+
+    .mini-play-button{
+      background:var(--green);
+      border-color:var(--green);
+      color:#07100a;
+      font-weight:800
+    }
+
+    .mini-player-close{
+      font-size:20px;
+      color:var(--muted)
+    }
+
+    /* =====================================================
+       NAVIGATION ENTRE SOURATES
+    ====================================================== */
+
+    .surah-navigation{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:10px;
+      align-items:stretch;
+      margin:30px auto 10px;
+      max-width:680px
+    }
+
+    .surah-nav-button{
+      min-width:0;
+      padding:13px 12px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:var(--surface);
+      color:var(--text);
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s
+    }
+
+    .surah-nav-button:hover{
+      border-color:var(--green);
+      background:var(--surface-2)
+    }
+
+    .surah-nav-button:disabled{
+      opacity:.35;
+      cursor:not-allowed
+    }
+
+    .surah-nav-home{
+      padding-left:15px;
+      padding-right:15px;
+      color:var(--green-light)
+    }
+
+    .surah-nav-label{
+      display:block;
+      font-size:9px;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:.08em;
+      margin-bottom:4px
+    }
+
+    .surah-nav-name{
+      display:block;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis
+    }
+
+    @media(max-width:600px){
+
+      .resume-card{
+        align-items:flex-start
+      }
+
+      .resume-button{
+        margin-left:auto
+      }
+
+      .mini-player{
+        bottom:calc(10px + env(safe-area-inset-bottom));
+        width:calc(100% - 16px)
+      }
+
+      .known-surah{
+        width:100%
+      }
+
+      .surah-navigation{
+        grid-template-columns:1fr 1fr;
+        gap:8px
+      }
+
+      .surah-nav-home{
+        grid-column:1 / -1;
+        grid-row:1
+      }
+
+      .surah-nav-button:first-child{
+        grid-column:1
+      }
+
+      .surah-nav-button:last-child{
+        grid-column:2
+      }
+
+    }
+  </style>
 
 </head>
 
@@ -76,42 +330,41 @@ content="Mon Coran"
 
 <header class="topbar">
 
-<a
-href="#"
-class="brand"
-id="brandHome"
->
-
-📖 <span>Mon Coran</span>
-
+  <a
+    href="#"
+    class="brand"
+    id="brandHome"
+  >
+    📖 <span>Mon Coran</span>
   </a>
 
   <nav class="nav">
 
-<a
-  href="#"
-  id="navHome"
->
-  Accueil
-</a>
+    <a
+      href="#"
+      id="navHome"
+    >
+      Accueil
+    </a>
 
-<a
-  href="#sourates"
-  id="navSourates"
->
-  📖 Sourates
-</a>
+    <a
+      href="#sourates"
+      id="navSourates"
+    >
+      📖 Sourates
+    </a>
 
-<a
-  href="#dossiers"
-  id="navDossiers"
->
-  📚 Dossiers
-</a>
+    <a
+      href="#dossiers"
+      id="navDossiers"
+    >
+      📚 Dossiers
+    </a>
 
   </nav>
 
 </header>
+
 
 <main>
 
@@ -124,64 +377,86 @@ id="brandHome"
     class="home-section"
   >
 
-<div class="home-content">
+    <div class="home-content">
 
-  <div class="bismillah">
-    ﷽
-  </div>
+      <div class="bismillah">
+        ﷽
+      </div>
 
+      <p class="eyebrow">
+        APPRENDRE • COMPRENDRE • PROGRESSER
+      </p>
 
-  <p class="eyebrow">
-    APPRENDRE • COMPRENDRE • PROGRESSER
-  </p>
+      <h1>
+        Mon étude du Coran
+      </h1>
 
+      <p class="home-description">
+        Un espace personnel pour découvrir les 114 sourates,
+        les lire, les écouter et organiser les versets
+        qui t'interpellent.
+      </p>
 
-  <h1>
-    Mon étude du Coran
-  </h1>
+      <div
+        class="resume-card"
+        id="resumeCard"
+        hidden
+      >
 
+        <div class="resume-card-icon">
+          ▶️
+        </div>
 
-  <p class="home-description">
-    Un espace personnel pour découvrir les 114 sourates,
-    les lire, les écouter et organiser les versets
-    qui t'interpellent.
-  </p>
+        <div class="resume-card-content">
 
+          <p class="resume-label">
+            TA DERNIÈRE LECTURE
+          </p>
 
-  <div class="resume-card" id="resumeCard" hidden>
-    <div class="resume-card-icon">▶️</div>
-    <div class="resume-card-content">
-      <p class="resume-label">TA DERNIÈRE LECTURE</p>
-      <strong id="resumeTitle">Reprendre ma lecture</strong>
-      <span id="resumeDetails">Dernière position sauvegardée</span>
+          <strong id="resumeTitle">
+            Reprendre ma lecture
+          </strong>
+
+          <span id="resumeDetails">
+            Dernière position sauvegardée
+          </span>
+
+        </div>
+
+        <button
+          class="resume-button"
+          id="resumeButton"
+          type="button"
+        >
+          ▶️ Reprendre
+        </button>
+
+      </div>
+
+      <div class="home-buttons">
+
+        <button
+          class="primary-button"
+          id="startButton"
+          type="button"
+        >
+          📖 Commencer l’étude
+        </button>
+
+        <button
+          class="secondary-button"
+          id="homeDossiersButton"
+          type="button"
+        >
+          📚 Mes dossiers
+        </button>
+
+      </div>
+
     </div>
-    <button class="resume-button" id="resumeButton" type="button">▶️ Reprendre</button>
-  </div>
-
-  <div class="home-buttons">
-
-    <button
-      class="primary-button"
-      id="startButton"
-      type="button"
-    >
-      📖 Commencer l’étude
-    </button>
-
-
-    <button
-      class="secondary-button"
-      id="homeDossiersButton"
-      type="button"
-    >
-      📚 Mes dossiers
-    </button>
-
-  </div>
-
-</div>
 
   </section>
+
 
   <!-- =====================================================
        SOURATES
@@ -193,138 +468,131 @@ id="brandHome"
     hidden
   >
 
-<div class="section-header">
+    <div class="section-header">
 
-  <p class="eyebrow">
-    LE CORAN
-  </p>
+      <p class="eyebrow">
+        LE CORAN
+      </p>
 
+      <h2>
+        Les 114 sourates
+      </h2>
 
-  <h2>
-    Les 114 sourates
-  </h2>
+      <p class="section-description">
+        Recherche, filtre et choisis une sourate
+        pour commencer ta lecture.
+      </p>
 
-
-  <p class="section-description">
-    Recherche, filtre et choisis une sourate
-    pour commencer ta lecture.
-  </p>
-
-</div>
+    </div>
 
 
-<div class="search-box">
+    <div class="search-box">
 
-  <span>
-    🔎
-  </span>
+      <span>
+        🔎
+      </span>
 
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Rechercher une sourate..."
+        autocomplete="off"
+      >
 
-  <input
-    type="search"
-    id="searchInput"
-    placeholder="Rechercher une sourate..."
-    autocomplete="off"
-  >
-
-</div>
-
-
-<div class="filters">
-
-  <button
-    class="filter-button active"
-    data-filter="all"
-    type="button"
-  >
-    Toutes
-  </button>
+    </div>
 
 
-  <button
-    class="filter-button"
-    data-filter="meccan"
-    type="button"
-  >
-    🕋 Mecquoises
-  </button>
+    <div class="filters">
+
+      <button
+        class="filter-button active"
+        data-filter="all"
+        type="button"
+      >
+        Toutes
+      </button>
+
+      <button
+        class="filter-button"
+        data-filter="meccan"
+        type="button"
+      >
+        🕋 Mecquoises
+      </button>
+
+      <button
+        class="filter-button"
+        data-filter="medinan"
+        type="button"
+      >
+        🕌 Médinoises
+      </button>
+
+      <button
+        class="filter-button"
+        data-filter="known"
+        type="button"
+      >
+        ✓ Connues
+      </button>
+
+      <button
+        class="filter-button"
+        data-filter="unknown"
+        type="button"
+      >
+        📖 À apprendre
+      </button>
+
+    </div>
 
 
-  <button
-    class="filter-button"
-    data-filter="medinan"
-    type="button"
-  >
-    🕌 Médinoises
-  </button>
+    <div class="sort-row">
+
+      <label for="sortSelect">
+        Trier par
+      </label>
+
+      <select id="sortSelect">
+
+        <option value="quran">
+          Ordre du Coran
+        </option>
+
+        <option value="chronological">
+          Ordre chronologique
+        </option>
+
+        <option value="length">
+          Longueur
+        </option>
+
+      </select>
+
+    </div>
 
 
-  <button
-    class="filter-button"
-    data-filter="known"
-    type="button"
-  >
-    ✓ Connues
-  </button>
+    <div
+      class="results-count"
+      id="resultsCount"
+    >
+      Chargement...
+    </div>
 
 
-  <button
-    class="filter-button"
-    data-filter="unknown"
-    type="button"
-  >
-    📖 À apprendre
-  </button>
+    <div
+      class="sourates-list"
+      id="souratesList"
+    >
 
-</div>
+      <div class="loading">
+        Chargement des sourates...
+      </div>
 
-
-<div class="sort-row">
-
-  <label for="sortSelect">
-    Trier par
-  </label>
-
-
-  <select id="sortSelect">
-
-    <option value="quran">
-      Ordre du Coran
-    </option>
-
-    <option value="chronological">
-      Ordre chronologique
-    </option>
-
-    <option value="length">
-      Longueur
-    </option>
-
-  </select>
-
-</div>
-
-
-<div
-  class="results-count"
-  id="resultsCount"
->
-  Chargement...
-</div>
-
-
-<div
-  class="sourates-list"
-  id="souratesList"
->
-
-  <div class="loading">
-    Chargement des sourates...
-  </div>
-
-</div>
+    </div>
 
   </section>
+
 
   <!-- =====================================================
        DOSSIERS
@@ -336,52 +604,50 @@ id="brandHome"
     hidden
   >
 
-<div class="section-header">
+    <div class="section-header">
 
-  <p class="eyebrow">
-    MON ORGANISATION
-  </p>
+      <p class="eyebrow">
+        MON ORGANISATION
+      </p>
 
+      <h2>
+        📚 Mes dossiers
+      </h2>
 
-  <h2>
-    📚 Mes dossiers
-  </h2>
+      <p class="section-description">
+        Classe les versets qui t'intéressent par thème,
+        comme des playlists personnelles.
+      </p>
 
-
-  <p class="section-description">
-    Classe les versets qui t'intéressent par thème,
-    comme des playlists personnelles.
-  </p>
-
-</div>
+    </div>
 
 
-<div class="create-folder-card">
+    <div class="create-folder-card">
 
-  <input
-    type="text"
-    id="quickFolderName"
-    placeholder="Nom d'un nouveau dossier..."
-    maxlength="80"
-  >
+      <input
+        type="text"
+        id="quickFolderName"
+        placeholder="Nom d'un nouveau dossier..."
+        maxlength="80"
+      >
+
+      <button
+        id="createFolderButton"
+        type="button"
+      >
+        ＋ Créer
+      </button>
+
+    </div>
 
 
-  <button
-    id="createFolderButton"
-    type="button"
-  >
-    ＋ Créer
-  </button>
-
-</div>
-
-
-<div
-  id="foldersList"
-  class="folders-list"
-></div>
+    <div
+      id="foldersList"
+      class="folders-list"
+    ></div>
 
   </section>
+
 
   <!-- =====================================================
        LECTEUR
@@ -393,221 +659,322 @@ id="brandHome"
     hidden
   >
 
-<button
-  class="back-button"
-  id="backButton"
-  type="button"
->
-  ← Retour
-</button>
+    <button
+      class="back-button"
+      id="backButton"
+      type="button"
+    >
+      ← Retour
+    </button>
 
 
-<div class="reader-header">
+    <div class="reader-header">
 
-  <p
-    class="reader-number"
-    id="readerNumber"
-  >
-    Sourate
-  </p>
-
-
-  <h2 id="readerTitle">
-    Chargement...
-  </h2>
-
-
-  <p
-    class="reader-arabic-title"
-    id="readerArabicTitle"
-  ></p>
-
-
-  <p
-    class="reader-info"
-    id="readerInfo"
-  ></p>
-
-  <label class="known-surah">
-    <input type="checkbox" id="knownSurahCheckbox">
-    <span>Je connais déjà cette sourate</span>
-  </label>
-
-</div>
-
-
-<!-- AUDIO -->
-
-<div class="audio-card">
-
-  <div class="audio-top">
-
-    <div>
-
-      <p class="audio-label">
-        🎧 RÉCITATION
+      <p
+        class="reader-number"
+        id="readerNumber"
+      >
+        Sourate
       </p>
 
+      <h2 id="readerTitle">
+        Chargement...
+      </h2>
 
-      <strong>
-        Mishary Rashid Alafasy
-      </strong>
+      <p
+        class="reader-arabic-title"
+        id="readerArabicTitle"
+      ></p>
+
+      <p
+        class="reader-info"
+        id="readerInfo"
+      ></p>
+
+      <label class="known-surah">
+
+        <input
+          type="checkbox"
+          id="knownSurahCheckbox"
+        >
+
+        <span>
+          Je connais déjà cette sourate
+        </span>
+
+      </label>
 
     </div>
 
 
-    <button
-      class="repeat-button"
-      id="repeatButton"
-      type="button"
-      title="Répéter la sourate"
-    >
-      🔁
-    </button>
+    <!-- AUDIO -->
 
-  </div>
+    <div class="audio-card">
 
+      <div class="audio-top">
 
-  <audio
-    id="audioPlayer"
-    controls
-    preload="metadata"
-  ></audio>
+        <div>
 
+          <p class="audio-label">
+            🎧 RÉCITATION
+          </p>
 
-  <div class="audio-controls">
+          <strong>
+            Mishary Rashid Alafasy
+          </strong>
 
-    <button
-      class="play-button"
-      id="playButton"
-      type="button"
-    >
-      ▶️ Lire
-    </button>
+        </div>
 
+        <button
+          class="repeat-button"
+          id="repeatButton"
+          type="button"
+          title="Répéter la sourate"
+        >
+          🔁
+        </button>
 
-    <button
-      class="restart-button"
-      id="restartButton"
-      type="button"
-    >
-      ↺ Recommencer
-    </button>
-
-  </div>
+      </div>
 
 
-  <div
-    class="audio-status"
-    id="audioStatus"
-  >
-    Prêt à écouter
-  </div>
-
-</div>
+      <audio
+        id="audioPlayer"
+        controls
+        preload="metadata"
+      ></audio>
 
 
-<!-- AFFICHAGE -->
+      <div class="audio-controls">
 
-<div class="display-card">
+        <button
+          class="play-button"
+          id="playButton"
+          type="button"
+        >
+          ▶️ Lire
+        </button>
 
-  <div class="display-card-header">
+        <button
+          class="restart-button"
+          id="restartButton"
+          type="button"
+        >
+          ↺ Recommencer
+        </button>
 
-    <div>
-
-      <p class="audio-label">
-        📖 AFFICHAGE
-      </p>
+      </div>
 
 
-      <strong>
-        Choisir la langue
-      </strong>
+      <div
+        class="audio-status"
+        id="audioStatus"
+      >
+        Prêt à écouter
+      </div>
 
     </div>
 
-  </div>
+
+    <!-- AFFICHAGE -->
+
+    <div class="display-card">
+
+      <div class="display-card-header">
+
+        <div>
+
+          <p class="audio-label">
+            📖 AFFICHAGE
+          </p>
+
+          <strong>
+            Choisir la langue
+          </strong>
+
+        </div>
+
+      </div>
 
 
-  <div class="display-buttons">
+      <div class="display-buttons">
 
-    <button
-      class="display-button active"
-      data-mode="both"
-      type="button"
+        <button
+          class="display-button active"
+          data-mode="both"
+          type="button"
+        >
+          Arabe + Français
+        </button>
+
+        <button
+          class="display-button"
+          data-mode="arabic"
+          type="button"
+        >
+          Arabe
+        </button>
+
+        <button
+          class="display-button"
+          data-mode="french"
+          type="button"
+        >
+          Français
+        </button>
+
+        <button
+          class="display-button"
+          data-mode="phonetic"
+          type="button"
+        >
+          Phonétique
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="reader-bismillah"
+      id="readerBismillah"
     >
-      Arabe + Français
-    </button>
+      ﷽
+    </div>
 
 
-    <button
-      class="display-button"
-      data-mode="arabic"
-      type="button"
+    <div
+      class="ayahs"
+      id="ayahsContainer"
     >
-      Arabe
-    </button>
+
+      <div class="loading">
+        Chargement de la sourate...
+      </div>
+
+    </div>
 
 
-    <button
-      class="display-button"
-      data-mode="french"
-      type="button"
-    >
-      Français
-    </button>
+    <!-- =====================================================
+         NAVIGATION ENTRE SOURATES
+    ====================================================== -->
+
+    <div class="surah-navigation">
+
+      <button
+        class="surah-nav-button"
+        id="previousSurahButton"
+        type="button"
+      >
+
+        <span class="surah-nav-label">
+          PRÉCÉDENTE
+        </span>
+
+        <span
+          class="surah-nav-name"
+          id="previousSurahName"
+        >
+          ← Sourate précédente
+        </span>
+
+      </button>
 
 
-    <button
-      class="display-button"
-      data-mode="phonetic"
-      type="button"
-    >
-      Phonétique
-    </button>
-
-  </div>
-
-</div>
+      <button
+        class="surah-nav-button surah-nav-home"
+        id="surahListButton"
+        type="button"
+      >
+        📖 Les sourates
+      </button>
 
 
-<div
-  class="reader-bismillah"
-  id="readerBismillah"
->
-  ﷽
-</div>
+      <button
+        class="surah-nav-button"
+        id="nextSurahButton"
+        type="button"
+      >
 
+        <span class="surah-nav-label">
+          SUIVANTE
+        </span>
 
-<div
-  class="ayahs"
-  id="ayahsContainer"
->
+        <span
+          class="surah-nav-name"
+          id="nextSurahName"
+        >
+          Sourate suivante →
+        </span>
 
-  <div class="loading">
-    Chargement de la sourate...
-  </div>
+      </button>
 
-</div>
+    </div>
 
   </section>
 
 </main>
 
-<div class="mini-player" id="miniPlayer" hidden>
+
+<!-- =====================================================
+     MINI PLAYER
+===================================================== -->
+
+<div
+  class="mini-player"
+  id="miniPlayer"
+  hidden
+>
+
   <div class="mini-player-info">
-    <span class="mini-player-label">🎧 LECTURE EN COURS</span>
-    <strong id="miniPlayerTitle">Sourate</strong>
-    <span id="miniPlayerVerse">Verset 1</span>
+
+    <span class="mini-player-label">
+      🎧 LECTURE EN COURS
+    </span>
+
+    <strong id="miniPlayerTitle">
+      Sourate
+    </strong>
+
+    <span id="miniPlayerVerse">
+      Verset 1
+    </span>
+
   </div>
-  <button class="mini-player-button" id="miniRestartButton" type="button" title="Recommencer le verset">↺</button>
-  <button class="mini-player-button mini-play-button" id="miniPlayButton" type="button" title="Lecture / pause">▶️</button>
-  <button class="mini-player-close" id="miniCloseButton" type="button" title="Masquer le lecteur">×</button>
+
+  <button
+    class="mini-player-button"
+    id="miniRestartButton"
+    type="button"
+    title="Recommencer le verset"
+  >
+    ↺
+  </button>
+
+  <button
+    class="mini-player-button mini-play-button"
+    id="miniPlayButton"
+    type="button"
+    title="Lecture / pause"
+  >
+    ▶️
+  </button>
+
+  <button
+    class="mini-player-close"
+    id="miniCloseButton"
+    type="button"
+    title="Masquer le lecteur"
+  >
+    ×
+  </button>
+
 </div>
+
 
 <!-- =====================================================
      MODALE DOSSIER
-====================================================== -->
+===================================================== -->
 
 <div
   id="folderModal"
@@ -622,70 +989,70 @@ id="brandHome"
     aria-labelledby="folderModalTitle"
   >
 
-<button
-  class="modal-close"
-  id="closeFolderModal"
-  type="button"
-  aria-label="Fermer"
->
-  ×
-</button>
+    <button
+      class="modal-close"
+      id="closeFolderModal"
+      type="button"
+      aria-label="Fermer"
+    >
+      ×
+    </button>
 
 
-<p class="eyebrow">
-  ORGANISER LE VERSET
-</p>
+    <p class="eyebrow">
+      ORGANISER LE VERSET
+    </p>
 
 
-<h3 id="folderModalTitle">
-  📚 Ajouter à un dossier
-</h3>
+    <h3 id="folderModalTitle">
+      📚 Ajouter à un dossier
+    </h3>
 
 
-<p class="folder-modal-description">
-  Tu peux enregistrer ce même verset dans plusieurs dossiers.
-</p>
+    <p class="folder-modal-description">
+      Tu peux enregistrer ce même verset dans plusieurs dossiers.
+    </p>
 
 
-<div
-  id="folderVersePreview"
-  class="folder-verse-preview"
-></div>
+    <div
+      id="folderVersePreview"
+      class="folder-verse-preview"
+    ></div>
 
 
-<div
-  id="existingFolders"
-  class="folder-choices"
-></div>
+    <div
+      id="existingFolders"
+      class="folder-choices"
+    ></div>
 
 
-<p class="new-folder-title">
-  Créer un nouveau dossier
-</p>
+    <p class="new-folder-title">
+      Créer un nouveau dossier
+    </p>
 
 
-<div class="new-folder-row">
+    <div class="new-folder-row">
 
-  <input
-    type="text"
-    id="newFolderName"
-    placeholder="Ex. Histoire du prophète Yusuf"
-    maxlength="80"
-  >
+      <input
+        type="text"
+        id="newFolderName"
+        placeholder="Ex. Histoire du prophète Yusuf"
+        maxlength="80"
+      >
 
+      <button
+        id="createFolderFromModal"
+        type="button"
+      >
+        Créer
+      </button>
 
-  <button
-    id="createFolderFromModal"
-    type="button"
-  >
-    Créer
-  </button>
-
-</div>
+    </div>
 
   </div>
 
 </div>
+
 
 <script>
 
@@ -719,105 +1086,6 @@ let repeatSourate = false;
 let readerReturnView = "sourates";
 
 
-/* =====================================================
-   PROGRESSION / SOURATES CONNUES
-===================================================== */
-
-function loadReadingState() {
-  try {
-    const saved = localStorage.getItem(READING_STORAGE_KEY);
-    if (!saved) return null;
-    const parsed = JSON.parse(saved);
-    if (!parsed || !Number.isInteger(parsed.surahNumber)) return null;
-    return parsed;
-  } catch (error) {
-    console.error("Erreur progression :", error);
-    return null;
-  }
-}
-
-function saveReadingState(force = false) {
-  if (!currentSourate || !currentAyahs.length) return;
-  const now = Date.now();
-  if (!force && now - lastReadingSave < 1000) return;
-  lastReadingSave = now;
-  readingState = {
-    surahNumber: currentSourate.number,
-    ayahIndex: currentAyahIndex,
-    ayahNumber: currentAyahs[currentAyahIndex]?.numberInSurah || 1,
-    audioTime: Number.isFinite(audioPlayer.currentTime) ? audioPlayer.currentTime : 0,
-    displayMode: currentDisplayMode,
-    savedAt: now
-  };
-  try { localStorage.setItem(READING_STORAGE_KEY, JSON.stringify(readingState)); }
-  catch (error) { console.error("Impossible de sauvegarder la progression :", error); }
-}
-
-function loadKnownSourates() {
-  try {
-    const saved = localStorage.getItem(KNOWN_STORAGE_KEY);
-    if (!saved) return [];
-    const parsed = JSON.parse(saved);
-    return Array.isArray(parsed) ? parsed.map(Number).filter(Number.isInteger) : [];
-  } catch (error) {
-    console.error("Erreur sourates connues :", error);
-    return [];
-  }
-}
-
-function saveKnownSourates() {
-  try { localStorage.setItem(KNOWN_STORAGE_KEY, JSON.stringify(knownSourates)); }
-  catch (error) { console.error("Impossible de sauvegarder les sourates connues :", error); }
-}
-
-function isSourateKnown(number) { return knownSourates.includes(Number(number)); }
-
-function setSourateKnown(number, known) {
-  number = Number(number);
-  if (known && !knownSourates.includes(number)) knownSourates.push(number);
-  if (!known) knownSourates = knownSourates.filter(item => item !== number);
-  saveKnownSourates();
-  if (Array.isArray(sourates) && sourates.length) displaySourates();
-}
-
-function updateResumeCard() {
-  if (!resumeCard) return;
-  if (!readingState || !Number.isInteger(readingState.surahNumber)) {
-    resumeCard.hidden = true;
-    return;
-  }
-  const name = frenchNames[readingState.surahNumber] || `Sourate ${readingState.surahNumber}`;
-  resumeTitle.textContent = name;
-  resumeDetails.textContent = `Verset ${readingState.ayahNumber || 1}${readingState.displayMode ? " • " + ({both:"Arabe + Français",arabic:"Arabe",french:"Français",phonetic:"Phonétique"}[readingState.displayMode] || "") : ""}`;
-  resumeCard.hidden = false;
-}
-
-function updateMiniPlayer() {
-  if (!miniPlayer || !currentSourate || !currentAyahs.length || miniPlayerHidden) return;
-  miniPlayerTitle.textContent = frenchNames[currentSourate.number] || currentSourate.englishName;
-  miniPlayerVerse.textContent = `Verset ${currentAyahs[currentAyahIndex]?.numberInSurah || 1} / ${currentAyahs.length}`;
-  miniPlayButton.textContent = audioPlayer.paused ? "▶️" : "⏸️";
-  miniPlayer.hidden = false;
-}
-
-function hideMiniPlayer() {
-  miniPlayerHidden = true;
-  miniPlayer.hidden = true;
-}
-
-function restoreDisplayMode(mode) {
-  if (!mode) return;
-  const button = document.querySelector(`.display-button[data-mode="${mode}"]`);
-  if (!button) return;
-  document.querySelectorAll(".display-button").forEach(btn => btn.classList.remove("active"));
-  button.classList.add("active");
-  currentDisplayMode = mode;
-}
-
-/* =====================================================
-   DOSSIERS
-===================================================== */
-
 const FOLDERS_STORAGE_KEY =
   "mon-coran-dossiers";
 
@@ -827,955 +1095,24 @@ const READING_STORAGE_KEY =
 const KNOWN_STORAGE_KEY =
   "mon-coran-known-sourates";
 
-let readingState = loadReadingState();
-let knownSourates = loadKnownSourates();
-let miniPlayerHidden = false;
-let lastReadingSave = 0;
 
+let readingState =
+  loadReadingState();
+
+let knownSourates =
+  loadKnownSourates();
+
+let miniPlayerHidden =
+  false;
+
+let lastReadingSave =
+  0;
 
 let folders =
   loadFolders();
 
-
 let selectedAyahForFolder =
   null;
-
-
-/* =====================================================
-   CHARGER DOSSIERS
-===================================================== */
-
-function loadFolders() {
-
-  try {
-
-    const saved =
-      localStorage.getItem(
-        FOLDERS_STORAGE_KEY
-      );
-
-
-    if (!saved) {
-      return [];
-    }
-
-
-    const parsed =
-      JSON.parse(saved);
-
-
-    if (!Array.isArray(parsed)) {
-      return [];
-    }
-
-
-    return parsed.map(folder => ({
-
-      id:
-        folder.id ||
-        Date.now().toString(),
-
-      name:
-        folder.name ||
-        "Dossier",
-
-      verses:
-        Array.isArray(folder.verses)
-          ? folder.verses
-          : []
-
-    }));
-
-
-  } catch (error) {
-
-    console.error(
-      "Erreur lors du chargement des dossiers :",
-      error
-    );
-
-    return [];
-
-  }
-
-}
-
-
-/* =====================================================
-   SAUVEGARDER DOSSIERS
-===================================================== */
-
-function saveFolders() {
-
-  try {
-
-    localStorage.setItem(
-      FOLDERS_STORAGE_KEY,
-      JSON.stringify(folders)
-    );
-
-  } catch (error) {
-
-    console.error(
-      "Impossible de sauvegarder les dossiers :",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   CRÉER DOSSIER
-===================================================== */
-
-function createFolder(name) {
-
-  const cleanName =
-    String(name || "").trim();
-
-
-  if (!cleanName) {
-
-    alert(
-      "Entre un nom pour le dossier."
-    );
-
-    return null;
-
-  }
-
-
-  const exists =
-    folders.some(
-      folder =>
-        folder.name.toLowerCase() ===
-        cleanName.toLowerCase()
-    );
-
-
-  if (exists) {
-
-    alert(
-      "Un dossier avec ce nom existe déjà."
-    );
-
-    return null;
-
-  }
-
-
-  const folder = {
-
-    id:
-      Date.now().toString() +
-      Math.random()
-        .toString(36)
-        .slice(2),
-
-    name:
-      cleanName,
-
-    verses: []
-
-  };
-
-
-  folders.push(folder);
-
-  saveFolders();
-
-  renderFolders();
-
-
-  return folder;
-
-}
-
-
-/* =====================================================
-   SUPPRIMER DOSSIER
-===================================================== */
-
-function deleteFolder(folderId) {
-
-  const folder =
-    folders.find(
-      item =>
-        item.id === folderId
-    );
-
-
-  if (!folder) {
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      `Supprimer le dossier "${folder.name}" ?\n\nLes versets seront seulement retirés de ce dossier.`
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  folders =
-    folders.filter(
-      item =>
-        item.id !== folderId
-    );
-
-
-  saveFolders();
-
-  renderFolders();
-
-}
-
-
-/* =====================================================
-   CRÉER OBJET VERSET
-===================================================== */
-
-function createVerseObject(ayah) {
-
-  return {
-
-    id:
-      `${currentSourate.number}:${ayah.numberInSurah}`,
-
-    surahNumber:
-      currentSourate.number,
-
-    surahName:
-      frenchNames[currentSourate.number] ||
-      currentSourate.englishName,
-
-    arabicSurahName:
-      currentSourate.name,
-
-    ayahNumber:
-      ayah.numberInSurah,
-
-    arabic:
-      ayah.arabic || "",
-
-    french:
-      ayah.french || "",
-
-    transliteration:
-      ayah.transliteration || ""
-
-  };
-
-}
-
-
-/* =====================================================
-   AJOUTER VERSET À UN DOSSIER
-===================================================== */
-
-function addVerseToFolder(
-  folderId,
-  verse
-) {
-
-  const folder =
-    folders.find(
-      item =>
-        item.id === folderId
-    );
-
-
-  if (!folder) {
-    return;
-  }
-
-
-  const alreadyExists =
-    folder.verses.some(
-      saved =>
-        saved.id === verse.id
-    );
-
-
-  if (alreadyExists) {
-
-    alert(
-      `Ce verset est déjà dans « ${folder.name} ».`
-    );
-
-    return;
-
-  }
-
-
-  folder.verses.push(
-    verse
-  );
-
-
-  saveFolders();
-
-  renderFolders();
-
-  renderExistingFolders();
-
-}
-
-
-/* =====================================================
-   RETIRER VERSET
-===================================================== */
-
-function removeVerseFromFolder(
-  folderId,
-  verseId
-) {
-
-  const folder =
-    folders.find(
-      item =>
-        item.id === folderId
-    );
-
-
-  if (!folder) {
-    return;
-  }
-
-
-  folder.verses =
-    folder.verses.filter(
-      verse =>
-        verse.id !== verseId
-    );
-
-
-  saveFolders();
-
-  renderFolders();
-
-}
-
-
-/* =====================================================
-   OUVRIR MODALE
-===================================================== */
-
-function openFolderModal(ayah) {
-
-  selectedAyahForFolder =
-    createVerseObject(ayah);
-
-
-  folderVersePreview.innerHTML = `
-
-    <div class="saved-verse">
-
-      <div class="saved-verse-header">
-
-        <span class="saved-verse-surah">
-          ${escapeHtml(
-            selectedAyahForFolder.surahName
-          )}
-        </span>
-
-        <span class="saved-verse-number">
-          ${selectedAyahForFolder.ayahNumber}
-        </span>
-
-      </div>
-
-
-      <div
-        class="saved-verse-arabic"
-        dir="rtl"
-      >
-        ${escapeHtml(
-          selectedAyahForFolder.arabic
-        )}
-      </div>
-
-
-      <div class="saved-verse-french">
-        ${escapeHtml(
-          selectedAyahForFolder.french
-        )}
-      </div>
-
-    </div>
-
-  `;
-
-
-  renderExistingFolders();
-
-
-  newFolderName.value =
-    "";
-
-
-  folderModal.hidden =
-    false;
-
-
-  setTimeout(
-    () =>
-      newFolderName.focus(),
-    50
-  );
-
-}
-
-
-/* =====================================================
-   AFFICHER DOSSIERS DANS MODALE
-===================================================== */
-
-function renderExistingFolders() {
-
-  existingFolders.innerHTML =
-    "";
-
-
-  if (!folders.length) {
-
-    existingFolders.innerHTML = `
-
-      <div class="folder-empty">
-
-        <div class="folder-empty-icon">
-          📁
-        </div>
-
-        <strong>
-          Aucun dossier
-        </strong>
-
-        <p>
-          Crée ton premier dossier ci-dessous.
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  folders.forEach(
-    folder => {
-
-      const label =
-        document.createElement(
-          "label"
-        );
-
-
-      label.className =
-        "folder-choice";
-
-
-      const checkbox =
-        document.createElement(
-          "input"
-        );
-
-
-      checkbox.type =
-        "checkbox";
-
-
-      checkbox.checked =
-        folder.verses.some(
-          verse =>
-            verse.id ===
-            selectedAyahForFolder?.id
-        );
-
-
-      const info =
-        document.createElement(
-          "span"
-        );
-
-
-      info.className =
-        "folder-choice-text";
-
-
-      info.innerHTML = `
-
-        <span class="folder-choice-name">
-          ${escapeHtml(folder.name)}
-        </span>
-
-        <span class="folder-choice-count">
-          ${folder.verses.length}
-          verset${folder.verses.length > 1 ? "s" : ""}
-        </span>
-
-      `;
-
-
-      checkbox.addEventListener(
-        "change",
-        () => {
-
-          if (
-            !selectedAyahForFolder
-          ) {
-            return;
-          }
-
-
-          if (
-            checkbox.checked
-          ) {
-
-            addVerseToFolder(
-              folder.id,
-              selectedAyahForFolder
-            );
-
-          } else {
-
-            removeVerseFromFolder(
-              folder.id,
-              selectedAyahForFolder.id
-            );
-
-          }
-
-
-          renderExistingFolders();
-
-        }
-      );
-
-
-      label.appendChild(
-        checkbox
-      );
-
-
-      label.appendChild(
-        info
-      );
-
-
-      existingFolders.appendChild(
-        label
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   FERMER MODALE
-===================================================== */
-
-function closeFolderModal() {
-
-  folderModal.hidden =
-    true;
-
-  selectedAyahForFolder =
-    null;
-
-}
-
-
-/* =====================================================
-   AFFICHER DOSSIERS
-===================================================== */
-
-function renderFolders() {
-
-  foldersList.innerHTML =
-    "";
-
-
-  if (!folders.length) {
-
-    foldersList.innerHTML = `
-
-      <div class="folder-empty">
-
-        <div class="folder-empty-icon">
-          📚
-        </div>
-
-        <strong>
-          Tu n'as encore aucun dossier.
-        </strong>
-
-        <p>
-          Crée ton premier dossier pour organiser
-          les versets du Coran par thème.
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  folders.forEach(
-    folder => {
-
-      const card =
-        document.createElement(
-          "div"
-        );
-
-
-      card.className =
-        "folder-card";
-
-
-      card.innerHTML = `
-
-        <div class="folder-card-main">
-
-          <div class="folder-icon">
-            📁
-          </div>
-
-
-          <div class="folder-card-text">
-
-            <div class="folder-card-name">
-              ${escapeHtml(folder.name)}
-            </div>
-
-            <div class="folder-card-count">
-              ${folder.verses.length}
-              verset${folder.verses.length > 1 ? "s" : ""}
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <span class="folder-card-arrow">
-          →
-        </span>
-
-      `;
-
-
-      card.addEventListener(
-        "click",
-        () =>
-          openFolder(
-            folder.id
-          )
-      );
-
-
-      foldersList.appendChild(
-        card
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   OUVRIR UN DOSSIER
-===================================================== */
-
-function openFolder(folderId) {
-
-  const folder =
-    folders.find(
-      item =>
-        item.id === folderId
-    );
-
-
-  if (!folder) {
-    return;
-  }
-
-
-  foldersList.innerHTML = `
-
-    <button
-      class="back-button"
-      id="folderBackButton"
-      type="button"
-    >
-      ← Mes dossiers
-    </button>
-
-
-    <div class="folder-detail-header">
-
-      <div class="folder-detail-title-wrapper">
-
-        <h2 class="folder-detail-title">
-          ${escapeHtml(folder.name)}
-        </h2>
-
-        <p class="folder-detail-count">
-          ${folder.verses.length}
-          verset${folder.verses.length > 1 ? "s" : ""}
-        </p>
-
-      </div>
-
-
-      <button
-        class="folder-delete-button"
-        id="deleteCurrentFolder"
-        type="button"
-      >
-        🗑️ Supprimer
-      </button>
-
-    </div>
-
-
-    <div
-      class="folder-verse-list"
-      id="folderVerseList"
-    ></div>
-
-  `;
-
-
-  document
-    .getElementById(
-      "folderBackButton"
-    )
-    .addEventListener(
-      "click",
-      renderFolders
-    );
-
-
-  document
-    .getElementById(
-      "deleteCurrentFolder"
-    )
-    .addEventListener(
-      "click",
-      () => {
-
-        deleteFolder(
-          folder.id
-        );
-
-      }
-    );
-
-
-  const verseList =
-    document.getElementById(
-      "folderVerseList"
-    );
-
-
-  if (!folder.verses.length) {
-
-    verseList.innerHTML = `
-
-      <div class="folder-empty">
-
-        <div class="folder-empty-icon">
-          📖
-        </div>
-
-        <strong>
-          Ce dossier est vide
-        </strong>
-
-        <p>
-          Depuis une sourate, clique sur
-          « Ajouter à un dossier » pour conserver
-          les versets qui t'intéressent.
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  folder.verses.forEach(
-    verse => {
-
-      const article =
-        document.createElement(
-          "article"
-        );
-
-
-      article.className =
-        "saved-verse";
-
-
-      article.innerHTML = `
-
-        <div class="saved-verse-header">
-
-          <span class="saved-verse-surah">
-            ${escapeHtml(
-              verse.surahName
-            )}
-          </span>
-
-
-          <span class="saved-verse-number">
-            Verset ${verse.ayahNumber}
-          </span>
-
-        </div>
-
-
-        <div
-          class="saved-verse-arabic"
-          dir="rtl"
-        >
-          ${escapeHtml(
-            verse.arabic
-          )}
-        </div>
-
-
-        <div class="saved-verse-french">
-
-          ${escapeHtml(
-            verse.french
-          )}
-
-        </div>
-
-
-        <div class="saved-verse-actions">
-
-          <button
-            class="saved-verse-open"
-            type="button"
-          >
-            📖 Ouvrir
-          </button>
-
-
-          <button
-            class="saved-verse-remove"
-            type="button"
-          >
-            Retirer
-          </button>
-
-        </div>
-
-      `;
-
-
-      article
-        .querySelector(
-          ".saved-verse-open"
-        )
-        .addEventListener(
-          "click",
-          () => {
-
-            openSourateAtAyah(
-              verse.surahNumber,
-              verse.ayahNumber,
-              "folders"
-            );
-
-          }
-        );
-
-
-      article
-        .querySelector(
-          ".saved-verse-remove"
-        )
-        .addEventListener(
-          "click",
-          () => {
-
-            removeVerseFromFolder(
-              folder.id,
-              verse.id
-            );
-
-
-            openFolder(
-              folder.id
-            );
-
-          }
-        );
-
-
-      verseList.appendChild(
-        article
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHtml(value) {
-
-  return String(
-    value ?? ""
-  )
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-
-}
 
 
 /* =====================================================
@@ -1929,256 +1266,1610 @@ const chronologicalOrder = [
 ===================================================== */
 
 const homeSection =
-  document.getElementById(
-    "homeSection"
-  );
+  document.getElementById("homeSection");
 
 const souratesSection =
-  document.getElementById(
-    "souratesSection"
-  );
+  document.getElementById("souratesSection");
 
 const readerSection =
-  document.getElementById(
-    "readerSection"
-  );
+  document.getElementById("readerSection");
 
 const dossiersSection =
-  document.getElementById(
-    "dossiersSection"
-  );
+  document.getElementById("dossiersSection");
 
 const souratesList =
-  document.getElementById(
-    "souratesList"
-  );
+  document.getElementById("souratesList");
 
 const resultsCount =
-  document.getElementById(
-    "resultsCount"
-  );
+  document.getElementById("resultsCount");
 
 const searchInput =
-  document.getElementById(
-    "searchInput"
-  );
+  document.getElementById("searchInput");
 
 const sortSelect =
-  document.getElementById(
-    "sortSelect"
-  );
+  document.getElementById("sortSelect");
 
 const readerTitle =
-  document.getElementById(
-    "readerTitle"
-  );
+  document.getElementById("readerTitle");
 
 const readerNumber =
-  document.getElementById(
-    "readerNumber"
-  );
+  document.getElementById("readerNumber");
 
 const readerArabicTitle =
-  document.getElementById(
-    "readerArabicTitle"
-  );
+  document.getElementById("readerArabicTitle");
 
 const readerInfo =
-  document.getElementById(
-    "readerInfo"
-  );
+  document.getElementById("readerInfo");
 
 const ayahsContainer =
-  document.getElementById(
-    "ayahsContainer"
-  );
+  document.getElementById("ayahsContainer");
 
 const audioPlayer =
-  document.getElementById(
-    "audioPlayer"
-  );
+  document.getElementById("audioPlayer");
 
 const playButton =
-  document.getElementById(
-    "playButton"
-  );
+  document.getElementById("playButton");
 
 const restartButton =
-  document.getElementById(
-    "restartButton"
-  );
+  document.getElementById("restartButton");
 
 const repeatButton =
-  document.getElementById(
-    "repeatButton"
-  );
+  document.getElementById("repeatButton");
 
 const audioStatus =
-  document.getElementById(
-    "audioStatus"
-  );
+  document.getElementById("audioStatus");
 
 const readerBismillah =
-  document.getElementById(
-    "readerBismillah"
-  );
+  document.getElementById("readerBismillah");
 
 const foldersList =
-  document.getElementById(
-    "foldersList"
-  );
+  document.getElementById("foldersList");
 
 const folderModal =
-  document.getElementById(
-    "folderModal"
-  );
+  document.getElementById("folderModal");
 
 const folderVersePreview =
-  document.getElementById(
-    "folderVersePreview"
-  );
+  document.getElementById("folderVersePreview");
 
 const existingFolders =
-  document.getElementById(
-    "existingFolders"
-  );
+  document.getElementById("existingFolders");
 
 const newFolderName =
-  document.getElementById(
-    "newFolderName"
-  );
+  document.getElementById("newFolderName");
 
 const quickFolderName =
-  document.getElementById(
-    "quickFolderName"
+  document.getElementById("quickFolderName");
+
+const resumeCard =
+  document.getElementById("resumeCard");
+
+const resumeTitle =
+  document.getElementById("resumeTitle");
+
+const resumeDetails =
+  document.getElementById("resumeDetails");
+
+const resumeButton =
+  document.getElementById("resumeButton");
+
+const knownSurahCheckbox =
+  document.getElementById("knownSurahCheckbox");
+
+const miniPlayer =
+  document.getElementById("miniPlayer");
+
+const miniPlayerTitle =
+  document.getElementById("miniPlayerTitle");
+
+const miniPlayerVerse =
+  document.getElementById("miniPlayerVerse");
+
+const miniPlayButton =
+  document.getElementById("miniPlayButton");
+
+const miniRestartButton =
+  document.getElementById("miniRestartButton");
+
+const miniCloseButton =
+  document.getElementById("miniCloseButton");
+
+const previousSurahButton =
+  document.getElementById("previousSurahButton");
+
+const previousSurahName =
+  document.getElementById("previousSurahName");
+
+const nextSurahButton =
+  document.getElementById("nextSurahButton");
+
+const nextSurahName =
+  document.getElementById("nextSurahName");
+
+const surahListButton =
+  document.getElementById("surahListButton");
+
+
+/* =====================================================
+   PROGRESSION
+===================================================== */
+
+function loadReadingState(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        READING_STORAGE_KEY
+      );
+
+    if(!saved){
+      return null;
+    }
+
+    const parsed =
+      JSON.parse(saved);
+
+    if(
+      !parsed ||
+      !Number.isInteger(
+        parsed.surahNumber
+      )
+    ){
+      return null;
+    }
+
+    return parsed;
+
+  }catch(error){
+
+    console.error(
+      "Erreur progression :",
+      error
+    );
+
+    return null;
+
+  }
+
+}
+
+
+function saveReadingState(force=false){
+
+  if(
+    !currentSourate ||
+    !currentAyahs.length
+  ){
+    return;
+  }
+
+  const now =
+    Date.now();
+
+  if(
+    !force &&
+    now - lastReadingSave < 1000
+  ){
+    return;
+  }
+
+  lastReadingSave =
+    now;
+
+  readingState = {
+
+    surahNumber:
+      currentSourate.number,
+
+    ayahIndex:
+      currentAyahIndex,
+
+    ayahNumber:
+      currentAyahs[
+        currentAyahIndex
+      ]?.numberInSurah || 1,
+
+    audioTime:
+      Number.isFinite(
+        audioPlayer.currentTime
+      )
+        ? audioPlayer.currentTime
+        : 0,
+
+    displayMode:
+      currentDisplayMode,
+
+    savedAt:
+      now
+
+  };
+
+  try{
+
+    localStorage.setItem(
+      READING_STORAGE_KEY,
+      JSON.stringify(
+        readingState
+      )
+    );
+
+  }catch(error){
+
+    console.error(
+      "Impossible de sauvegarder la progression :",
+      error
+    );
+
+  }
+
+}
+
+
+function loadKnownSourates(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        KNOWN_STORAGE_KEY
+      );
+
+    if(!saved){
+      return [];
+    }
+
+    const parsed =
+      JSON.parse(saved);
+
+    return Array.isArray(parsed)
+      ? parsed
+          .map(Number)
+          .filter(
+            Number.isInteger
+          )
+      : [];
+
+  }catch(error){
+
+    console.error(
+      "Erreur sourates connues :",
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function saveKnownSourates(){
+
+  try{
+
+    localStorage.setItem(
+      KNOWN_STORAGE_KEY,
+      JSON.stringify(
+        knownSourates
+      )
+    );
+
+  }catch(error){
+
+    console.error(
+      "Impossible de sauvegarder les sourates connues :",
+      error
+    );
+
+  }
+
+}
+
+
+function isSourateKnown(number){
+
+  return knownSourates.includes(
+    Number(number)
   );
 
-const resumeCard = document.getElementById("resumeCard");
-const resumeTitle = document.getElementById("resumeTitle");
-const resumeDetails = document.getElementById("resumeDetails");
-const resumeButton = document.getElementById("resumeButton");
-const knownSurahCheckbox = document.getElementById("knownSurahCheckbox");
-const miniPlayer = document.getElementById("miniPlayer");
-const miniPlayerTitle = document.getElementById("miniPlayerTitle");
-const miniPlayerVerse = document.getElementById("miniPlayerVerse");
-const miniPlayButton = document.getElementById("miniPlayButton");
-const miniRestartButton = document.getElementById("miniRestartButton");
-const miniCloseButton = document.getElementById("miniCloseButton");
+}
 
 
-/* =====================================================
-   PROGRESSION / MINI LECTEUR
-===================================================== */
+function setSourateKnown(
+  number,
+  known
+){
 
-knownSurahCheckbox.addEventListener("change", () => {
-  if (currentSourate) setSourateKnown(currentSourate.number, knownSurahCheckbox.checked);
-});
+  number =
+    Number(number);
 
-resumeButton.addEventListener("click", () => {
-  if (!readingState) return;
-  readerReturnView = "sourates";
-  openSourate(readingState.surahNumber).then(() => {
-    const index = Math.min(readingState.ayahIndex || 0, Math.max(0, currentAyahs.length - 1));
-    currentAyahIndex = index;
-    loadCurrentAyah(Number(readingState.audioTime || 0));
-    setTimeout(() => {
-      const current = document.querySelector(`.ayah[data-index="${index}"]`);
-      if (current) current.scrollIntoView({behavior:"smooth", block:"center"});
-    }, 150);
-  });
-});
+  if(
+    known &&
+    !knownSourates.includes(
+      number
+    )
+  ){
 
-miniPlayButton.addEventListener("click", () => {
-  if (audioPlayer.paused) playAudio();
-  else pauseAudio();
-});
+    knownSourates.push(
+      number
+    );
 
-miniRestartButton.addEventListener("click", () => {
-  audioPlayer.currentTime = 0;
-  saveReadingState(true);
-  playAudio();
-});
+  }
 
-miniCloseButton.addEventListener("click", hideMiniPlayer);
+  if(!known){
 
-audioPlayer.addEventListener("timeupdate", () => {
-  saveReadingState(false);
-  updateMiniPlayer();
-});
+    knownSourates =
+      knownSourates.filter(
+        item =>
+          item !== number
+      );
 
-audioPlayer.addEventListener("play", updateMiniPlayer);
-audioPlayer.addEventListener("pause", () => {
-  saveReadingState(true);
-  updateMiniPlayer();
-});
+  }
 
-window.addEventListener("pagehide", () => saveReadingState(true));
-window.addEventListener("beforeunload", () => saveReadingState(true));
+  saveKnownSourates();
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+  if(
+    Array.isArray(sourates) &&
+    sourates.length
+  ){
 
-function showHome() {
+    displaySourates();
 
-  homeSection.hidden =
-    false;
-
-  souratesSection.hidden =
-    true;
-
-  dossiersSection.hidden =
-    true;
-
-  readerSection.hidden =
-    true;
-
-
-  updateResumeCard();
-  updateMiniPlayer();
-  window.scrollTo(0,0);
+  }
 
 }
 
 
-function showSourates() {
+function updateResumeCard(){
 
-  homeSection.hidden =
-    true;
+  if(!resumeCard){
+    return;
+  }
 
-  souratesSection.hidden =
+  if(
+    !readingState ||
+    !Number.isInteger(
+      readingState.surahNumber
+    )
+  ){
+
+    resumeCard.hidden =
+      true;
+
+    return;
+
+  }
+
+  const name =
+    frenchNames[
+      readingState.surahNumber
+    ] ||
+    `Sourate ${readingState.surahNumber}`;
+
+  resumeTitle.textContent =
+    name;
+
+  const modeNames = {
+
+    both:
+      "Arabe + Français",
+
+    arabic:
+      "Arabe",
+
+    french:
+      "Français",
+
+    phonetic:
+      "Phonétique"
+
+  };
+
+  resumeDetails.textContent =
+    `Verset ${
+      readingState.ayahNumber || 1
+    }${
+      readingState.displayMode
+        ? " • " +
+          (
+            modeNames[
+              readingState.displayMode
+            ] || ""
+          )
+        : ""
+    }`;
+
+  resumeCard.hidden =
     false;
-
-  dossiersSection.hidden =
-    true;
-
-  readerSection.hidden =
-    true;
-
-
-  updateMiniPlayer();
-  window.scrollTo(0,0);
 
 }
 
 
-function showDossiers() {
+function updateMiniPlayer(){
 
-  homeSection.hidden =
-    true;
+  if(
+    !miniPlayer ||
+    !currentSourate ||
+    !currentAyahs.length ||
+    miniPlayerHidden
+  ){
+    return;
+  }
 
-  souratesSection.hidden =
-    true;
+  miniPlayerTitle.textContent =
+    frenchNames[
+      currentSourate.number
+    ] ||
+    currentSourate.englishName;
 
-  dossiersSection.hidden =
+  miniPlayerVerse.textContent =
+    `Verset ${
+      currentAyahs[
+        currentAyahIndex
+      ]?.numberInSurah || 1
+    } / ${
+      currentAyahs.length
+    }`;
+
+  miniPlayButton.textContent =
+    audioPlayer.paused
+      ? "▶️"
+      : "⏸️";
+
+  miniPlayer.hidden =
     false;
 
-  readerSection.hidden =
+}
+
+
+function hideMiniPlayer(){
+
+  miniPlayerHidden =
     true;
 
+  miniPlayer.hidden =
+    true;
 
+}
+
+
+function restoreDisplayMode(mode){
+
+  if(!mode){
+    return;
+  }
+
+  const button =
+    document.querySelector(
+      `.display-button[data-mode="${mode}"]`
+    );
+
+  if(!button){
+    return;
+  }
+
+  document
+    .querySelectorAll(
+      ".display-button"
+    )
+    .forEach(
+      btn =>
+        btn.classList.remove(
+          "active"
+        )
+    );
+
+  button.classList.add(
+    "active"
+  );
+
+  currentDisplayMode =
+    mode;
+
+}
+
+
+/* =====================================================
+   DOSSIERS
+===================================================== */
+
+function loadFolders(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        FOLDERS_STORAGE_KEY
+      );
+
+    if(!saved){
+      return [];
+    }
+
+    const parsed =
+      JSON.parse(saved);
+
+    if(!Array.isArray(parsed)){
+      return [];
+    }
+
+    return parsed.map(
+      folder => ({
+
+        id:
+          folder.id ||
+          Date.now().toString(),
+
+        name:
+          folder.name ||
+          "Dossier",
+
+        verses:
+          Array.isArray(
+            folder.verses
+          )
+            ? folder.verses
+            : []
+
+      })
+    );
+
+  }catch(error){
+
+    console.error(
+      "Erreur lors du chargement des dossiers :",
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function saveFolders(){
+
+  try{
+
+    localStorage.setItem(
+      FOLDERS_STORAGE_KEY,
+      JSON.stringify(
+        folders
+      )
+    );
+
+  }catch(error){
+
+    console.error(
+      "Impossible de sauvegarder les dossiers :",
+      error
+    );
+
+  }
+
+}
+
+
+function createFolder(name){
+
+  const cleanName =
+    String(
+      name || ""
+    ).trim();
+
+  if(!cleanName){
+
+    alert(
+      "Entre un nom pour le dossier."
+    );
+
+    return null;
+
+  }
+
+  const exists =
+    folders.some(
+      folder =>
+        folder.name.toLowerCase() ===
+        cleanName.toLowerCase()
+    );
+
+  if(exists){
+
+    alert(
+      "Un dossier avec ce nom existe déjà."
+    );
+
+    return null;
+
+  }
+
+  const folder = {
+
+    id:
+      Date.now().toString() +
+      Math.random()
+        .toString(36)
+        .slice(2),
+
+    name:
+      cleanName,
+
+    verses:
+      []
+
+  };
+
+  folders.push(
+    folder
+  );
+
+  saveFolders();
   renderFolders();
 
+  return folder;
+
+}
+
+
+function deleteFolder(
+  folderId
+){
+
+  const folder =
+    folders.find(
+      item =>
+        item.id ===
+        folderId
+    );
+
+  if(!folder){
+    return;
+  }
+
+  const confirmed =
+    confirm(
+      `Supprimer le dossier "${folder.name}" ?\n\nLes versets seront seulement retirés de ce dossier.`
+    );
+
+  if(!confirmed){
+    return;
+  }
+
+  folders =
+    folders.filter(
+      item =>
+        item.id !==
+        folderId
+    );
+
+  saveFolders();
+  renderFolders();
+
+}
+
+
+function createVerseObject(
+  ayah
+){
+
+  return {
+
+    id:
+      `${currentSourate.number}:${ayah.numberInSurah}`,
+
+    surahNumber:
+      currentSourate.number,
+
+    surahName:
+      frenchNames[
+        currentSourate.number
+      ] ||
+      currentSourate.englishName,
+
+    arabicSurahName:
+      currentSourate.name,
+
+    ayahNumber:
+      ayah.numberInSurah,
+
+    arabic:
+      ayah.arabic || "",
+
+    french:
+      ayah.french || "",
+
+    transliteration:
+      ayah.transliteration || ""
+
+  };
+
+}
+
+
+function addVerseToFolder(
+  folderId,
+  verse
+){
+
+  const folder =
+    folders.find(
+      item =>
+        item.id ===
+        folderId
+    );
+
+  if(!folder){
+    return;
+  }
+
+  const alreadyExists =
+    folder.verses.some(
+      saved =>
+        saved.id ===
+        verse.id
+    );
+
+  if(alreadyExists){
+
+    alert(
+      `Ce verset est déjà dans « ${folder.name} ».`
+    );
+
+    return;
+
+  }
+
+  folder.verses.push(
+    verse
+  );
+
+  saveFolders();
+  renderFolders();
+  renderExistingFolders();
+
+}
+
+
+function removeVerseFromFolder(
+  folderId,
+  verseId
+){
+
+  const folder =
+    folders.find(
+      item =>
+        item.id ===
+        folderId
+    );
+
+  if(!folder){
+    return;
+  }
+
+  folder.verses =
+    folder.verses.filter(
+      verse =>
+        verse.id !==
+        verseId
+    );
+
+  saveFolders();
+  renderFolders();
+
+}
+
+
+function openFolderModal(
+  ayah
+){
+
+  selectedAyahForFolder =
+    createVerseObject(
+      ayah
+    );
+
+  folderVersePreview.innerHTML = `
+
+    <div class="saved-verse">
+
+      <div class="saved-verse-header">
+
+        <span class="saved-verse-surah">
+          ${escapeHtml(
+            selectedAyahForFolder.surahName
+          )}
+        </span>
+
+        <span class="saved-verse-number">
+          ${selectedAyahForFolder.ayahNumber}
+        </span>
+
+      </div>
+
+      <div
+        class="saved-verse-arabic"
+        dir="rtl"
+      >
+        ${escapeHtml(
+          selectedAyahForFolder.arabic
+        )}
+      </div>
+
+      <div class="saved-verse-french">
+        ${escapeHtml(
+          selectedAyahForFolder.french
+        )}
+      </div>
+
+    </div>
+
+  `;
+
+  renderExistingFolders();
+
+  newFolderName.value =
+    "";
+
+  folderModal.hidden =
+    false;
+
+  setTimeout(
+    () =>
+      newFolderName.focus(),
+    50
+  );
+
+}
+
+
+function renderExistingFolders(){
+
+  existingFolders.innerHTML =
+    "";
+
+  if(!folders.length){
+
+    existingFolders.innerHTML = `
+
+      <div class="folder-empty">
+
+        <div class="folder-empty-icon">
+          📁
+        </div>
+
+        <strong>
+          Aucun dossier
+        </strong>
+
+        <p>
+          Crée ton premier dossier ci-dessous.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  folders.forEach(
+    folder => {
+
+      const label =
+        document.createElement(
+          "label"
+        );
+
+      label.className =
+        "folder-choice";
+
+      const checkbox =
+        document.createElement(
+          "input"
+        );
+
+      checkbox.type =
+        "checkbox";
+
+      checkbox.checked =
+        folder.verses.some(
+          verse =>
+            verse.id ===
+            selectedAyahForFolder?.id
+        );
+
+      const info =
+        document.createElement(
+          "span"
+        );
+
+      info.className =
+        "folder-choice-text";
+
+      info.innerHTML = `
+
+        <span class="folder-choice-name">
+          ${escapeHtml(
+            folder.name
+          )}
+        </span>
+
+        <span class="folder-choice-count">
+          ${folder.verses.length}
+          verset${folder.verses.length > 1 ? "s" : ""}
+        </span>
+
+      `;
+
+      checkbox.addEventListener(
+        "change",
+        () => {
+
+          if(
+            !selectedAyahForFolder
+          ){
+            return;
+          }
+
+          if(
+            checkbox.checked
+          ){
+
+            addVerseToFolder(
+              folder.id,
+              selectedAyahForFolder
+            );
+
+          }else{
+
+            removeVerseFromFolder(
+              folder.id,
+              selectedAyahForFolder.id
+            );
+
+          }
+
+          renderExistingFolders();
+
+        }
+      );
+
+      label.appendChild(
+        checkbox
+      );
+
+      label.appendChild(
+        info
+      );
+
+      existingFolders.appendChild(
+        label
+      );
+
+    }
+  );
+
+}
+
+
+function closeFolderModal(){
+
+  folderModal.hidden =
+    true;
+
+  selectedAyahForFolder =
+    null;
+
+}
+
+
+function renderFolders(){
+
+  foldersList.innerHTML =
+    "";
+
+  if(!folders.length){
+
+    foldersList.innerHTML = `
+
+      <div class="folder-empty">
+
+        <div class="folder-empty-icon">
+          📚
+        </div>
+
+        <strong>
+          Tu n'as encore aucun dossier.
+        </strong>
+
+        <p>
+          Crée ton premier dossier pour organiser
+          les versets du Coran par thème.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  folders.forEach(
+    folder => {
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+      card.className =
+        "folder-card";
+
+      card.innerHTML = `
+
+        <div class="folder-card-main">
+
+          <div class="folder-icon">
+            📁
+          </div>
+
+          <div class="folder-card-text">
+
+            <div class="folder-card-name">
+              ${escapeHtml(
+                folder.name
+              )}
+            </div>
+
+            <div class="folder-card-count">
+              ${folder.verses.length}
+              verset${folder.verses.length > 1 ? "s" : ""}
+            </div>
+
+          </div>
+
+        </div>
+
+        <span class="folder-card-arrow">
+          →
+        </span>
+
+      `;
+
+      card.addEventListener(
+        "click",
+        () =>
+          openFolder(
+            folder.id
+          )
+      );
+
+      foldersList.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+function openFolder(
+  folderId
+){
+
+  const folder =
+    folders.find(
+      item =>
+        item.id ===
+        folderId
+    );
+
+  if(!folder){
+    return;
+  }
+
+  foldersList.innerHTML = `
+
+    <button
+      class="back-button"
+      id="folderBackButton"
+      type="button"
+    >
+      ← Mes dossiers
+    </button>
+
+    <div class="folder-detail-header">
+
+      <div class="folder-detail-title-wrapper">
+
+        <h2 class="folder-detail-title">
+          ${escapeHtml(
+            folder.name
+          )}
+        </h2>
+
+        <p class="folder-detail-count">
+          ${folder.verses.length}
+          verset${folder.verses.length > 1 ? "s" : ""}
+        </p>
+
+      </div>
+
+      <button
+        class="folder-delete-button"
+        id="deleteCurrentFolder"
+        type="button"
+      >
+        🗑️ Supprimer
+      </button>
+
+    </div>
+
+    <div
+      class="folder-verse-list"
+      id="folderVerseList"
+    ></div>
+
+  `;
+
+  document
+    .getElementById(
+      "folderBackButton"
+    )
+    .addEventListener(
+      "click",
+      renderFolders
+    );
+
+  document
+    .getElementById(
+      "deleteCurrentFolder"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        deleteFolder(
+          folder.id
+        );
+
+      }
+    );
+
+  const verseList =
+    document.getElementById(
+      "folderVerseList"
+    );
+
+  if(!folder.verses.length){
+
+    verseList.innerHTML = `
+
+      <div class="folder-empty">
+
+        <div class="folder-empty-icon">
+          📖
+        </div>
+
+        <strong>
+          Ce dossier est vide
+        </strong>
+
+        <p>
+          Depuis une sourate, clique sur
+          « Ajouter à un dossier » pour conserver
+          les versets qui t'intéressent.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  folder.verses.forEach(
+    verse => {
+
+      const article =
+        document.createElement(
+          "article"
+        );
+
+      article.className =
+        "saved-verse";
+
+      article.innerHTML = `
+
+        <div class="saved-verse-header">
+
+          <span class="saved-verse-surah">
+            ${escapeHtml(
+              verse.surahName
+            )}
+          </span>
+
+          <span class="saved-verse-number">
+            Verset ${verse.ayahNumber}
+          </span>
+
+        </div>
+
+        <div
+          class="saved-verse-arabic"
+          dir="rtl"
+        >
+          ${escapeHtml(
+            verse.arabic
+          )}
+        </div>
+
+        <div class="saved-verse-french">
+          ${escapeHtml(
+            verse.french
+          )}
+        </div>
+
+        <div class="saved-verse-actions">
+
+          <button
+            class="saved-verse-open"
+            type="button"
+          >
+            📖 Ouvrir
+          </button>
+
+          <button
+            class="saved-verse-remove"
+            type="button"
+          >
+            Retirer
+          </button>
+
+        </div>
+
+      `;
+
+      article
+        .querySelector(
+          ".saved-verse-open"
+        )
+        .addEventListener(
+          "click",
+          () => {
+
+            openSourateAtAyah(
+              verse.surahNumber,
+              verse.ayahNumber
+            );
+
+          }
+        );
+
+      article
+        .querySelector(
+          ".saved-verse-remove"
+        )
+        .addEventListener(
+          "click",
+          () => {
+
+            removeVerseFromFolder(
+              folder.id,
+              verse.id
+            );
+
+            openFolder(
+              folder.id
+            );
+
+          }
+        );
+
+      verseList.appendChild(
+        article
+      );
+
+    }
+  );
+
+}
+
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   NAVIGATION SELON LE TRI
+===================================================== */
+
+function getNavigationOrder(){
+
+  const sort =
+    sortSelect.value;
+
+
+  /* -----------------------------------------------
+     ORDRE CHRONOLOGIQUE
+  ----------------------------------------------- */
+
+  if(
+    sort ===
+    "chronological"
+  ){
+
+    return [
+      ...chronologicalOrder
+    ];
+
+  }
+
+
+  /* -----------------------------------------------
+     ORDRE PAR LONGUEUR
+  ----------------------------------------------- */
+
+  if(
+    sort ===
+    "length"
+  ){
+
+    return [
+      ...sourates
+    ]
+      .sort(
+        (a,b) =>
+          b.numberOfAyahs -
+          a.numberOfAyahs
+      )
+      .map(
+        sourate =>
+          sourate.number
+      );
+
+  }
+
+
+  /* -----------------------------------------------
+     ORDRE DU CORAN
+  ----------------------------------------------- */
+
+  return [
+    ...sourates
+  ]
+    .sort(
+      (a,b) =>
+        a.number -
+        b.number
+    )
+    .map(
+      sourate =>
+        sourate.number
+    );
+
+}
+
+
+/* =====================================================
+   METTRE À JOUR NAVIGATION SOURATES
+===================================================== */
+
+function updateSurahNavigation(){
+
+  if(
+    !currentSourate
+  ){
+    return;
+  }
+
+
+  const navigationOrder =
+    getNavigationOrder();
+
+
+  const currentNumber =
+    Number(
+      currentSourate.number
+    );
+
+
+  const currentPosition =
+    navigationOrder.indexOf(
+      currentNumber
+    );
+
+
+  if(
+    currentPosition === -1
+  ){
+    return;
+  }
+
+
+  const previousNumber =
+    currentPosition > 0
+      ? navigationOrder[
+          currentPosition - 1
+        ]
+      : null;
+
+
+  const nextNumber =
+    currentPosition <
+    navigationOrder.length - 1
+      ? navigationOrder[
+          currentPosition + 1
+        ]
+      : null;
+
+
+  /* -----------------------------------------------
+     PRÉCÉDENTE
+  ----------------------------------------------- */
+
+  if(
+    previousNumber
+  ){
+
+    previousSurahButton.disabled =
+      false;
+
+    previousSurahName.textContent =
+      `← ${previousNumber}. ${
+        frenchNames[
+          previousNumber
+        ] ||
+        "Sourate"
+      }`;
+
+  }else{
+
+    previousSurahButton.disabled =
+      true;
+
+    previousSurahName.textContent =
+      "Aucune précédente";
+
+  }
+
+
+  /* -----------------------------------------------
+     SUIVANTE
+  ----------------------------------------------- */
+
+  if(
+    nextNumber
+  ){
+
+    nextSurahButton.disabled =
+      false;
+
+    nextSurahName.textContent =
+      `${
+        nextNumber
+      }. ${
+        frenchNames[
+          nextNumber
+        ] ||
+        "Sourate"
+      } →`;
+
+  }else{
+
+    nextSurahButton.disabled =
+      true;
+
+    nextSurahName.textContent =
+      "Aucune suivante";
+
+  }
+
+}
+
+
+/* =====================================================
+   NAVIGATION PRINCIPALE
+===================================================== */
+
+function showHome(){
+
+  homeSection.hidden =
+    false;
+
+  souratesSection.hidden =
+    true;
+
+  dossiersSection.hidden =
+    true;
+
+  readerSection.hidden =
+    true;
+
+  updateResumeCard();
+
+  updateMiniPlayer();
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+}
+
+
+function showSourates(){
+
+  homeSection.hidden =
+    true;
+
+  souratesSection.hidden =
+    false;
+
+  dossiersSection.hidden =
+    true;
+
+  readerSection.hidden =
+    true;
+
+  updateMiniPlayer();
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+}
+
+
+function showDossiers(){
+
+  homeSection.hidden =
+    true;
+
+  souratesSection.hidden =
+    true;
+
+  dossiersSection.hidden =
+    false;
+
+  readerSection.hidden =
+    true;
+
+  renderFolders();
 
   window.scrollTo(
     0,
@@ -2192,21 +2883,19 @@ function showDossiers() {
    CHARGER SOURATES
 ===================================================== */
 
-async function loadSourates() {
+async function loadSourates(){
 
-  try {
+  try{
 
     resultsCount.textContent =
       "Chargement...";
-
 
     const response =
       await fetch(
         `${API}/surah`
       );
 
-
-    if (!response.ok) {
+    if(!response.ok){
 
       throw new Error(
         `Erreur API : ${response.status}`
@@ -2214,15 +2903,15 @@ async function loadSourates() {
 
     }
 
-
     const data =
       await response.json();
 
-
-    if (
+    if(
       !data ||
-      !Array.isArray(data.data)
-    ) {
+      !Array.isArray(
+        data.data
+      )
+    ){
 
       throw new Error(
         "Réponse API invalide"
@@ -2230,21 +2919,17 @@ async function loadSourates() {
 
     }
 
-
     sourates =
       data.data;
 
-
     displaySourates();
 
-
-  } catch (error) {
+  }catch(error){
 
     console.error(
       "Erreur chargement sourates :",
       error
     );
-
 
     souratesList.innerHTML = `
 
@@ -2262,7 +2947,6 @@ async function loadSourates() {
 
     `;
 
-
     resultsCount.textContent =
       "";
 
@@ -2275,12 +2959,15 @@ async function loadSourates() {
    AFFICHER SOURATES
 ===================================================== */
 
-function displaySourates() {
+function displaySourates(){
 
-  if (!Array.isArray(sourates)) {
+  if(
+    !Array.isArray(
+      sourates
+    )
+  ){
     return;
   }
-
 
   const search =
     searchInput.value
@@ -2305,7 +2992,7 @@ function displaySourates() {
     [...sourates];
 
 
-  if (search) {
+  if(search){
 
     filtered =
       filtered.filter(
@@ -2316,30 +3003,37 @@ function displaySourates() {
               sourate.number
             ] || "";
 
-
           return (
 
             sourate.name
               .toLowerCase()
-              .includes(search)
+              .includes(
+                search
+              )
 
             ||
 
             sourate.englishName
               .toLowerCase()
-              .includes(search)
+              .includes(
+                search
+              )
 
             ||
 
             french
               .toLowerCase()
-              .includes(search)
+              .includes(
+                search
+              )
 
             ||
 
             String(
               sourate.number
-            ).includes(search)
+            ).includes(
+              search
+            )
 
           );
 
@@ -2349,10 +3043,10 @@ function displaySourates() {
   }
 
 
-  if (
+  if(
     filter ===
     "meccan"
-  ) {
+  ){
 
     filtered =
       filtered.filter(
@@ -2364,10 +3058,10 @@ function displaySourates() {
   }
 
 
-  if (
+  if(
     filter ===
     "medinan"
-  ) {
+  ){
 
     filtered =
       filtered.filter(
@@ -2379,22 +3073,45 @@ function displaySourates() {
   }
 
 
-  if (filter === "known") {
-    filtered = filtered.filter(sourate => isSourateKnown(sourate.number));
+  if(
+    filter ===
+    "known"
+  ){
+
+    filtered =
+      filtered.filter(
+        sourate =>
+          isSourateKnown(
+            sourate.number
+          )
+      );
+
   }
 
-  if (filter === "unknown") {
-    filtered = filtered.filter(sourate => !isSourateKnown(sourate.number));
+
+  if(
+    filter ===
+    "unknown"
+  ){
+
+    filtered =
+      filtered.filter(
+        sourate =>
+          !isSourateKnown(
+            sourate.number
+          )
+      );
+
   }
 
 
-  if (
+  if(
     sort ===
     "length"
-  ) {
+  ){
 
     filtered.sort(
-      (a, b) =>
+      (a,b) =>
         b.numberOfAyahs -
         a.numberOfAyahs
     );
@@ -2402,17 +3119,16 @@ function displaySourates() {
   }
 
 
-  if (
+  if(
     sort ===
     "chronological"
-  ) {
+  ){
 
     const positions =
       {};
 
-
     chronologicalOrder.forEach(
-      (number, index) => {
+      (number,index) => {
 
         positions[number] =
           index;
@@ -2420,9 +3136,8 @@ function displaySourates() {
       }
     );
 
-
     filtered.sort(
-      (a, b) =>
+      (a,b) =>
         positions[a.number] -
         positions[b.number]
     );
@@ -2430,13 +3145,13 @@ function displaySourates() {
   }
 
 
-  if (
+  if(
     sort ===
     "quran"
-  ) {
+  ){
 
     filtered.sort(
-      (a, b) =>
+      (a,b) =>
         a.number -
         b.number
     );
@@ -2456,7 +3171,9 @@ function displaySourates() {
     "";
 
 
-  if (!filtered.length) {
+  if(
+    !filtered.length
+  ){
 
     souratesList.innerHTML = `
 
@@ -2500,21 +3217,18 @@ function displaySourates() {
 
 function createSourateCard(
   sourate
-) {
+){
 
   const card =
     document.createElement(
       "button"
     );
 
-
   card.type =
     "button";
 
-
   card.className =
     "sourate-card";
-
 
   const french =
     frenchNames[
@@ -2522,13 +3236,11 @@ function createSourateCard(
     ] ||
     sourate.englishName;
 
-
   const revelation =
     sourate.revelationType ===
     "Meccan"
       ? "Mecquoise"
       : "Médinoise";
-
 
   const icon =
     sourate.revelationType ===
@@ -2536,27 +3248,25 @@ function createSourateCard(
       ? "🕋"
       : "🕌";
 
-
   card.innerHTML = `
 
     <span class="sourate-number">
       ${sourate.number}
     </span>
 
-
     <span class="sourate-main">
 
       <span class="sourate-french">
-        ${escapeHtml(french)}
+        ${escapeHtml(
+          french
+        )}
       </span>
-
 
       <span class="sourate-phonetic">
         ${escapeHtml(
           sourate.englishName
         )}
       </span>
-
 
       <span class="sourate-meta">
 
@@ -2565,19 +3275,23 @@ function createSourateCard(
         •
         ${sourate.numberOfAyahs}
         versets
-        ${isSourateKnown(sourate.number) ? '<span class="sourate-known">✓ Connue</span>' : ''}
+        ${
+          isSourateKnown(
+            sourate.number
+          )
+            ? '<span class="sourate-known">✓ Connue</span>'
+            : ""
+        }
 
       </span>
 
     </span>
-
 
     <span class="sourate-arabic">
       ${escapeHtml(
         sourate.name
       )}
     </span>
-
 
     <span class="sourate-arrow">
       →
@@ -2592,7 +3306,6 @@ function createSourateCard(
 
       readerReturnView =
         "sourates";
-
 
       openSourate(
         sourate.number
@@ -2613,13 +3326,15 @@ function createSourateCard(
 
 async function openSourate(
   number
-) {
+){
 
-  miniPlayerHidden = false;
+  miniPlayerHidden =
+    false;
+
   showReaderLoading();
 
 
-  try {
+  try{
 
     const [
 
@@ -2654,18 +3369,15 @@ async function openSourate(
         ? await arabicResponse.json()
         : null;
 
-
     const frenchData =
       frenchResponse.ok
         ? await frenchResponse.json()
         : null;
 
-
     const phoneticData =
       phoneticResponse.ok
         ? await phoneticResponse.json()
         : null;
-
 
     const audioData =
       audioResponse.ok
@@ -2673,9 +3385,9 @@ async function openSourate(
         : null;
 
 
-    if (
+    if(
       !arabicData?.data
-    ) {
+    ){
 
       throw new Error(
         "Texte arabe indisponible"
@@ -2710,7 +3422,7 @@ async function openSourate(
 
     currentAyahs =
       arabicAyahs.map(
-        (ayah, index) => ({
+        (ayah,index) => ({
 
           number:
             ayah.number,
@@ -2722,15 +3434,21 @@ async function openSourate(
             ayah.text,
 
           french:
-            frenchAyahs[index]?.text ||
+            frenchAyahs[
+              index
+            ]?.text ||
             "",
 
           transliteration:
-            phoneticAyahs[index]?.text ||
+            phoneticAyahs[
+              index
+            ]?.text ||
             "",
 
           audio:
-            audioAyahs[index]?.audio ||
+            audioAyahs[
+              index
+            ]?.audio ||
             null
 
         })
@@ -2738,11 +3456,21 @@ async function openSourate(
 
 
     const isResumingSameSurah =
-      readingState && readingState.surahNumber === number;
+      readingState &&
+      readingState.surahNumber ===
+        number;
 
-    currentAyahIndex = isResumingSameSurah
-      ? Math.min(readingState.ayahIndex || 0, Math.max(0, currentAyahs.length - 1))
-      : 0;
+
+    currentAyahIndex =
+      isResumingSameSurah
+        ? Math.min(
+            readingState.ayahIndex || 0,
+            Math.max(
+              0,
+              currentAyahs.length - 1
+            )
+          )
+        : 0;
 
 
     readerNumber.textContent =
@@ -2768,8 +3496,18 @@ async function openSourate(
         currentSourate.numberOfAyahs
       } versets`;
 
-    knownSurahCheckbox.checked = isSourateKnown(number);
-    restoreDisplayMode(isResumingSameSurah ? readingState.displayMode : "both");
+
+    knownSurahCheckbox.checked =
+      isSourateKnown(
+        number
+      );
+
+
+    restoreDisplayMode(
+      isResumingSameSurah
+        ? readingState.displayMode
+        : "both"
+    );
 
 
     readerBismillah.hidden =
@@ -2779,16 +3517,31 @@ async function openSourate(
     renderAyahs();
 
 
-    loadCurrentAyah(isResumingSameSurah ? Number(readingState.audioTime || 0) : 0);
+    loadCurrentAyah(
+      isResumingSameSurah
+        ? Number(
+            readingState.audioTime || 0
+          )
+        : 0
+    );
+
 
     audioStatus.textContent =
       "Prêt à écouter";
 
+
     updateMiniPlayer();
+
     updateResumeCard();
 
+    /* IMPORTANT :
+       la navigation utilise maintenant
+       le tri sélectionné */
 
-  } catch (error) {
+    updateSurahNavigation();
+
+
+  }catch(error){
 
     console.error(
       "Erreur ouverture sourate :",
@@ -2822,73 +3575,10 @@ async function openSourate(
 
 
 /* =====================================================
-   OUVRIR SOURATE SUR UN VERSET
+   LECTEUR CHARGEMENT
 ===================================================== */
 
-async function openSourateAtAyah(
-  surahNumber,
-  ayahNumber
-) {
-
-  readerReturnView =
-    "folders";
-
-
-  await openSourate(
-    surahNumber
-  );
-
-
-  const index =
-    currentAyahs.findIndex(
-      ayah =>
-        ayah.numberInSurah ===
-        ayahNumber
-    );
-
-
-  if (index === -1) {
-    return;
-  }
-
-
-  currentAyahIndex =
-    index;
-
-
-  loadCurrentAyah();
-
-
-  setTimeout(
-    () => {
-
-      const current =
-        document.querySelector(
-          `.ayah[data-index="${index}"]`
-        );
-
-
-      if (current) {
-
-        current.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-
-      }
-
-    },
-    100
-  );
-
-}
-
-
-/* =====================================================
-   CHARGEMENT LECTEUR
-===================================================== */
-
-function showReaderLoading() {
+function showReaderLoading(){
 
   homeSection.hidden =
     true;
@@ -2944,6 +3634,13 @@ function showReaderLoading() {
   playButton.textContent =
     "▶️ Lire";
 
+
+  previousSurahButton.disabled =
+    true;
+
+  nextSurahButton.disabled =
+    true;
+
 }
 
 
@@ -2951,24 +3648,22 @@ function showReaderLoading() {
    AFFICHER VERSETS
 ===================================================== */
 
-function renderAyahs() {
+function renderAyahs(){
 
   ayahsContainer.innerHTML =
     "";
 
 
   currentAyahs.forEach(
-    (ayah, index) => {
+    (ayah,index) => {
 
       const article =
         document.createElement(
           "article"
         );
 
-
       article.className =
         "ayah";
-
 
       article.dataset.index =
         index;
@@ -2979,10 +3674,8 @@ function renderAyahs() {
           "div"
         );
 
-
       number.className =
         "ayah-number";
-
 
       number.textContent =
         ayah.numberInSurah;
@@ -2993,37 +3686,30 @@ function renderAyahs() {
           "div"
         );
 
-
       content.className =
         "ayah-content";
 
 
-      /* ARABE */
-
-      if (
+      if(
         currentDisplayMode ===
-        "both" ||
+          "both" ||
         currentDisplayMode ===
-        "arabic"
-      ) {
+          "arabic"
+      ){
 
         const arabic =
           document.createElement(
             "div"
           );
 
-
         arabic.className =
           "ayah-arabic";
-
 
         arabic.dir =
           "rtl";
 
-
         arabic.textContent =
           ayah.arabic;
-
 
         content.appendChild(
           arabic
@@ -3032,29 +3718,24 @@ function renderAyahs() {
       }
 
 
-      /* FRANÇAIS */
-
-      if (
+      if(
         currentDisplayMode ===
-        "both" ||
+          "both" ||
         currentDisplayMode ===
-        "french"
-      ) {
+          "french"
+      ){
 
         const french =
           document.createElement(
             "div"
           );
 
-
         french.className =
           "ayah-french";
-
 
         french.textContent =
           ayah.french ||
           "Traduction indisponible.";
-
 
         content.appendChild(
           french
@@ -3063,27 +3744,22 @@ function renderAyahs() {
       }
 
 
-      /* PHONÉTIQUE */
-
-      if (
+      if(
         currentDisplayMode ===
         "phonetic"
-      ) {
+      ){
 
         const phonetic =
           document.createElement(
             "div"
           );
 
-
         phonetic.className =
           "ayah-phonetic";
-
 
         phonetic.textContent =
           ayah.transliteration ||
           "Phonétique indisponible.";
-
 
         content.appendChild(
           phonetic
@@ -3092,13 +3768,10 @@ function renderAyahs() {
       }
 
 
-      /* ACTIONS */
-
       const actions =
         document.createElement(
           "div"
         );
-
 
       actions.className =
         "ayah-actions";
@@ -3109,14 +3782,11 @@ function renderAyahs() {
           "button"
         );
 
-
       saveButton.type =
         "button";
 
-
       saveButton.className =
         "ayah-folder-button";
-
 
       saveButton.innerHTML =
         "📚 Ajouter à un dossier";
@@ -3127,7 +3797,6 @@ function renderAyahs() {
         event => {
 
           event.stopPropagation();
-
 
           openFolderModal(
             ayah
@@ -3141,16 +3810,13 @@ function renderAyahs() {
         saveButton
       );
 
-
       content.appendChild(
         actions
       );
 
-
       article.appendChild(
         number
       );
-
 
       article.appendChild(
         content
@@ -3163,10 +3829,12 @@ function renderAyahs() {
 
           currentAyahIndex =
             index;
-          saveReadingState(true);
+
+          saveReadingState(
+            true
+          );
 
           loadCurrentAyah();
-
 
           playAudio();
 
@@ -3188,11 +3856,13 @@ function renderAyahs() {
    AUDIO
 ===================================================== */
 
-function loadCurrentAyah(restoreTime = 0) {
+function loadCurrentAyah(
+  restoreTime=0
+){
 
-  if (
+  if(
     !currentAyahs.length
-  ) {
+  ){
     return;
   }
 
@@ -3203,14 +3873,14 @@ function loadCurrentAyah(restoreTime = 0) {
     ];
 
 
-  if (
+  if(
     ayah.audio
-  ) {
+  ){
 
     audioPlayer.src =
       ayah.audio;
 
-  } else {
+  }else{
 
     audioPlayer.src =
       `https://cdn.islamic.network/quran/audio/128/ar.alafasy/${ayah.number}.mp3`;
@@ -3218,13 +3888,45 @@ function loadCurrentAyah(restoreTime = 0) {
   }
 
 
-  audioPlayer.addEventListener("loadedmetadata", function restorePosition() {
-    audioPlayer.removeEventListener("loadedmetadata", restorePosition);
-    if (restoreTime > 0 && Number.isFinite(restoreTime)) {
-      try { audioPlayer.currentTime = Math.min(restoreTime, Math.max(0, audioPlayer.duration - 0.1)); } catch (error) {}
+  audioPlayer.addEventListener(
+    "loadedmetadata",
+    function restorePosition(){
+
+      audioPlayer.removeEventListener(
+        "loadedmetadata",
+        restorePosition
+      );
+
+
+      if(
+        restoreTime > 0 &&
+        Number.isFinite(
+          restoreTime
+        )
+      ){
+
+        try{
+
+          audioPlayer.currentTime =
+            Math.min(
+              restoreTime,
+              Math.max(
+                0,
+                audioPlayer.duration - 0.1
+              )
+            );
+
+        }catch(error){}
+
+      }
+
+      saveReadingState(
+        true
+      );
+
     }
-    saveReadingState(true);
-  });
+  );
+
 
   audioPlayer.load();
 
@@ -3247,33 +3949,38 @@ function loadCurrentAyah(restoreTime = 0) {
     );
 
 
-  if (current) {
+  if(current){
 
     current.classList.add(
       "active"
     );
 
-
     current.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
+      behavior:"smooth",
+      block:"center"
     });
 
   }
 
 
   audioStatus.textContent =
-    `Verset ${ayah.numberInSurah} / ${currentAyahs.length}`;
+    `Verset ${
+      ayah.numberInSurah
+    } / ${
+      currentAyahs.length
+    }`;
+
+
   updateMiniPlayer();
 
 }
 
 
-function playAudio() {
+function playAudio(){
 
-  if (
+  if(
     !audioPlayer.src
-  ) {
+  ){
     return;
   }
 
@@ -3285,7 +3992,11 @@ function playAudio() {
 
         playButton.textContent =
           "⏸️ Pause";
-        saveReadingState(true);
+
+        saveReadingState(
+          true
+        );
+
         updateMiniPlayer();
 
       }
@@ -3301,30 +4012,37 @@ function playAudio() {
 }
 
 
-function pauseAudio() {
+function pauseAudio(){
 
   audioPlayer.pause();
 
-
   playButton.textContent =
     "▶️ Lire";
-  saveReadingState(true);
+
+  saveReadingState(
+    true
+  );
+
   updateMiniPlayer();
 
 }
 
 
+/* =====================================================
+   AUDIO EVENTS
+===================================================== */
+
 playButton.addEventListener(
   "click",
   () => {
 
-    if (
+    if(
       audioPlayer.paused
-    ) {
+    ){
 
       playAudio();
 
-    } else {
+    }else{
 
       pauseAudio();
 
@@ -3340,7 +4058,11 @@ restartButton.addEventListener(
 
     audioPlayer.currentTime =
       0;
-    saveReadingState(true);
+
+    saveReadingState(
+      true
+    );
+
     playAudio();
 
   }
@@ -3353,7 +4075,6 @@ repeatButton.addEventListener(
 
     repeatSourate =
       !repeatSourate;
-
 
     repeatButton.classList.toggle(
       "active",
@@ -3368,38 +4089,40 @@ audioPlayer.addEventListener(
   "ended",
   () => {
 
-    if (
+    if(
       currentAyahIndex <
       currentAyahs.length - 1
-    ) {
+    ){
 
       currentAyahIndex++;
-      saveReadingState(true);
+
+      saveReadingState(
+        true
+      );
 
       loadCurrentAyah();
 
-
       playAudio();
-
 
       return;
 
     }
 
 
-    if (
+    if(
       repeatSourate
-    ) {
+    ){
 
       currentAyahIndex =
         0;
-      saveReadingState(true);
+
+      saveReadingState(
+        true
+      );
 
       loadCurrentAyah();
 
-
       playAudio();
-
 
       return;
 
@@ -3409,10 +4132,13 @@ audioPlayer.addEventListener(
     playButton.textContent =
       "▶️ Lire";
 
-
     audioStatus.textContent =
       "Sourate terminée";
-    saveReadingState(true);
+
+    saveReadingState(
+      true
+    );
+
     updateMiniPlayer();
 
   }
@@ -3420,7 +4146,88 @@ audioPlayer.addEventListener(
 
 
 /* =====================================================
-   AFFICHAGE ARABE / FRANÇAIS / PHONÉTIQUE
+   MINI PLAYER
+===================================================== */
+
+miniPlayButton.addEventListener(
+  "click",
+  () => {
+
+    if(
+      audioPlayer.paused
+    ){
+
+      playAudio();
+
+    }else{
+
+      pauseAudio();
+
+    }
+
+  }
+);
+
+
+miniRestartButton.addEventListener(
+  "click",
+  () => {
+
+    audioPlayer.currentTime =
+      0;
+
+    saveReadingState(
+      true
+    );
+
+    playAudio();
+
+  }
+);
+
+
+miniCloseButton.addEventListener(
+  "click",
+  hideMiniPlayer
+);
+
+
+audioPlayer.addEventListener(
+  "timeupdate",
+  () => {
+
+    saveReadingState(
+      false
+    );
+
+    updateMiniPlayer();
+
+  }
+);
+
+
+audioPlayer.addEventListener(
+  "play",
+  updateMiniPlayer
+);
+
+
+audioPlayer.addEventListener(
+  "pause",
+  () => {
+
+    saveReadingState(
+      true
+    );
+
+    updateMiniPlayer();
+
+  }
+);
+
+
+/* =====================================================
+   AFFICHAGE
 ===================================================== */
 
 document
@@ -3445,16 +4252,17 @@ document
                 )
             );
 
-
           button.classList.add(
             "active"
           );
 
-
           currentDisplayMode =
             button.dataset.mode;
 
-          saveReadingState(true);
+          saveReadingState(
+            true
+          );
+
           renderAyahs();
 
 
@@ -3464,7 +4272,7 @@ document
             );
 
 
-          if (current) {
+          if(current){
 
             current.classList.add(
               "active"
@@ -3505,11 +4313,9 @@ document
                 )
             );
 
-
           button.classList.add(
             "active"
           );
-
 
           displaySourates();
 
@@ -3534,14 +4340,32 @@ searchInput.addEventListener(
    TRI
 ===================================================== */
 
+/*
+   IMPORTANT :
+   Quand le tri change, on actualise aussi
+   les boutons précédent / suivant.
+*/
+
 sortSelect.addEventListener(
   "change",
-  displaySourates
+  () => {
+
+    displaySourates();
+
+    if(
+      currentSourate
+    ){
+
+      updateSurahNavigation();
+
+    }
+
+  }
 );
 
 
 /* =====================================================
-   NAVIGATION
+   NAVIGATION PRINCIPALE
 ===================================================== */
 
 document
@@ -3626,16 +4450,18 @@ document
     "click",
     () => {
 
-      saveReadingState(true);
+      saveReadingState(
+        true
+      );
 
-      if (
+      if(
         readerReturnView ===
         "folders"
-      ) {
+      ){
 
         showDossiers();
 
-      } else {
+      }else{
 
         showSourates();
 
@@ -3644,6 +4470,154 @@ document
     }
   );
 
+
+/* =====================================================
+   SOURATE PRÉCÉDENTE
+   RESPECTE LE TRI ACTUEL
+===================================================== */
+
+previousSurahButton.addEventListener(
+  "click",
+  () => {
+
+    if(
+      !currentSourate
+    ){
+      return;
+    }
+
+
+    const navigationOrder =
+      getNavigationOrder();
+
+
+    const currentNumber =
+      Number(
+        currentSourate.number
+      );
+
+
+    const currentPosition =
+      navigationOrder.indexOf(
+        currentNumber
+      );
+
+
+    if(
+      currentPosition <= 0
+    ){
+      return;
+    }
+
+
+    const previousNumber =
+      navigationOrder[
+        currentPosition - 1
+      ];
+
+
+    saveReadingState(
+      true
+    );
+
+
+    readerReturnView =
+      "sourates";
+
+
+    openSourate(
+      previousNumber
+    );
+
+  }
+);
+
+
+/* =====================================================
+   SOURATE SUIVANTE
+   RESPECTE LE TRI ACTUEL
+===================================================== */
+
+nextSurahButton.addEventListener(
+  "click",
+  () => {
+
+    if(
+      !currentSourate
+    ){
+      return;
+    }
+
+
+    const navigationOrder =
+      getNavigationOrder();
+
+
+    const currentNumber =
+      Number(
+        currentSourate.number
+      );
+
+
+    const currentPosition =
+      navigationOrder.indexOf(
+        currentNumber
+      );
+
+
+    if(
+      currentPosition === -1 ||
+      currentPosition >=
+        navigationOrder.length - 1
+    ){
+      return;
+    }
+
+
+    const nextNumber =
+      navigationOrder[
+        currentPosition + 1
+      ];
+
+
+    saveReadingState(
+      true
+    );
+
+
+    readerReturnView =
+      "sourates";
+
+
+    openSourate(
+      nextNumber
+    );
+
+  }
+);
+
+
+/* =====================================================
+   RETOUR À LA LISTE DES SOURATES
+===================================================== */
+
+surahListButton.addEventListener(
+  "click",
+  () => {
+
+    saveReadingState(
+      true
+    );
+
+    showSourates();
+
+  }
+);
+
+
+/* =====================================================
+   DOSSIERS
+===================================================== */
 
 document
   .getElementById(
@@ -3654,10 +4628,6 @@ document
     showDossiers
   );
 
-
-/* =====================================================
-   CRÉATION DOSSIER
-===================================================== */
 
 document
   .getElementById(
@@ -3671,7 +4641,7 @@ document
         quickFolderName.value.trim();
 
 
-      if (!name) {
+      if(!name){
 
         quickFolderName.focus();
 
@@ -3681,10 +4651,12 @@ document
 
 
       const folder =
-        createFolder(name);
+        createFolder(
+          name
+        );
 
 
-      if (folder) {
+      if(folder){
 
         quickFolderName.value =
           "";
@@ -3699,10 +4671,10 @@ quickFolderName.addEventListener(
   "keydown",
   event => {
 
-    if (
+    if(
       event.key ===
       "Enter"
-    ) {
+    ){
 
       document
         .getElementById(
@@ -3734,10 +4706,10 @@ folderModal.addEventListener(
   "click",
   event => {
 
-    if (
+    if(
       event.target ===
       folderModal
-    ) {
+    ){
 
       closeFolderModal();
 
@@ -3747,10 +4719,6 @@ folderModal.addEventListener(
 );
 
 
-/* =====================================================
-   CRÉER DOSSIER DEPUIS MODALE
-===================================================== */
-
 document
   .getElementById(
     "createFolderFromModal"
@@ -3759,9 +4727,9 @@ document
     "click",
     () => {
 
-      if (
+      if(
         !selectedAyahForFolder
-      ) {
+      ){
         return;
       }
 
@@ -3770,7 +4738,7 @@ document
         newFolderName.value.trim();
 
 
-      if (!name) {
+      if(!name){
 
         newFolderName.focus();
 
@@ -3780,10 +4748,12 @@ document
 
 
       const folder =
-        createFolder(name);
+        createFolder(
+          name
+        );
 
 
-      if (!folder) {
+      if(!folder){
         return;
       }
 
@@ -3808,10 +4778,10 @@ newFolderName.addEventListener(
   "keydown",
   event => {
 
-    if (
+    if(
       event.key ===
       "Enter"
-    ) {
+    ){
 
       document
         .getElementById(
@@ -3826,6 +4796,169 @@ newFolderName.addEventListener(
 
 
 /* =====================================================
+   CONNUE
+===================================================== */
+
+knownSurahCheckbox.addEventListener(
+  "change",
+  () => {
+
+    if(
+      currentSourate
+    ){
+
+      setSourateKnown(
+        currentSourate.number,
+        knownSurahCheckbox.checked
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   REPRENDRE LA LECTURE
+===================================================== */
+
+resumeButton.addEventListener(
+  "click",
+  () => {
+
+    if(
+      !readingState
+    ){
+      return;
+    }
+
+
+    readerReturnView =
+      "sourates";
+
+
+    openSourate(
+      readingState.surahNumber
+    )
+      .then(
+        () => {
+
+          const index =
+            Math.min(
+              readingState.ayahIndex || 0,
+              Math.max(
+                0,
+                currentAyahs.length - 1
+              )
+            );
+
+
+          currentAyahIndex =
+            index;
+
+
+          loadCurrentAyah(
+            Number(
+              readingState.audioTime || 0
+            )
+          );
+
+
+          setTimeout(
+            () => {
+
+              const current =
+                document.querySelector(
+                  `.ayah[data-index="${index}"]`
+                );
+
+
+              if(current){
+
+                current.scrollIntoView({
+                  behavior:"smooth",
+                  block:"center"
+                });
+
+              }
+
+            },
+            150
+          );
+
+        }
+      );
+
+  }
+);
+
+
+/* =====================================================
+   SOURATE DEPUIS UN DOSSIER
+===================================================== */
+
+async function openSourateAtAyah(
+  surahNumber,
+  ayahNumber
+){
+
+  readerReturnView =
+    "folders";
+
+
+  await openSourate(
+    surahNumber
+  );
+
+
+  const index =
+    currentAyahs.findIndex(
+      ayah =>
+        ayah.numberInSurah ===
+        ayahNumber
+    );
+
+
+  if(
+    index === -1
+  ){
+    return;
+  }
+
+
+  currentAyahIndex =
+    index;
+
+
+  loadCurrentAyah();
+
+
+  setTimeout(
+    () => {
+
+      const current =
+        document.querySelector(
+          `.ayah[data-index="${index}"]`
+        );
+
+
+      if(current){
+
+        current.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+      }
+
+    },
+    100
+  );
+
+}
+
+
+/* =====================================================
    ESCAPE
 ===================================================== */
 
@@ -3833,11 +4966,11 @@ document.addEventListener(
   "keydown",
   event => {
 
-    if (
+    if(
       event.key ===
       "Escape" &&
       !folderModal.hidden
-    ) {
+    ){
 
       closeFolderModal();
 
@@ -3848,12 +4981,34 @@ document.addEventListener(
 
 
 /* =====================================================
+   SAUVEGARDE
+===================================================== */
+
+window.addEventListener(
+  "pagehide",
+  () =>
+    saveReadingState(
+      true
+    )
+);
+
+
+window.addEventListener(
+  "beforeunload",
+  () =>
+    saveReadingState(
+      true
+    )
+);
+
+
+/* =====================================================
    PWA
 ===================================================== */
 
-if (
+if(
   "serviceWorker" in navigator
-) {
+){
 
   window.addEventListener(
     "load",
@@ -3882,7 +5037,9 @@ if (
 ===================================================== */
 
 renderFolders();
+
 updateResumeCard();
+
 loadSourates();
 
 </script>
