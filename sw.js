@@ -1,4 +1,4 @@
-const CACHE_NAME = "mon-coran-v1";
+const CACHE_NAME = "mon-coran-v2026-10-04-01";
 
 const FILES_TO_CACHE = [
   "./",
@@ -8,83 +8,54 @@ const FILES_TO_CACHE = [
   "./logo.png"
 ];
 
-
-/* Installation */
-
+/* INSTALLATION */
 self.addEventListener("install", event => {
-
-  event.waitUntil(
-
-    caches.open(CACHE_NAME)
-      .then(cache => {
-
-        return cache.addAll(FILES_TO_CACHE);
-
-      })
-
-  );
-
   self.skipWaiting();
 
-});
-
-
-/* Activation */
-
-self.addEventListener("activate", event => {
-
   event.waitUntil(
-
-    caches.keys()
-      .then(keys => {
-
-        return Promise.all(
-
-          keys
-            .filter(key => key !== CACHE_NAME)
-            .map(key => caches.delete(key))
-
-        );
-
-      })
-
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
   );
-
-  self.clients.claim();
-
 });
 
+/* ACTIVATION : SUPPRIME LES ANCIENS CACHES */
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames
+          .filter(cacheName => cacheName !== CACHE_NAME)
+          .map(cacheName => caches.delete(cacheName))
+      );
+    }).then(() => {
+      return self.clients.claim();
+    })
+  );
+});
 
-/* Interception des requêtes */
-
+/* RÉSEAU EN PRIORITÉ */
 self.addEventListener("fetch", event => {
-
   event.respondWith(
+    fetch(event.request)
+      .then(response => {
 
-    caches.match(event.request)
-      .then(cachedResponse => {
+        if (
+          response &&
+          response.status === 200 &&
+          event.request.method === "GET"
+        ) {
+          const responseClone = response.clone();
 
-        if (cachedResponse) {
-
-          return cachedResponse;
-
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseClone);
+          });
         }
 
-
-        return fetch(event.request)
-          .then(response => {
-
-            return response;
-
-          })
-          .catch(() => {
-
-            return caches.match("./index.html");
-
-          });
-
+        return response;
       })
-
+      .catch(() => {
+        return caches.match(event.request);
+      })
   );
-
 });
