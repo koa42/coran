@@ -53,6 +53,23 @@ content="Mon Coran"
   >
 
   <title>Mon étude du Coran</title>
+
+<style>
+.resume-card{display:flex;align-items:center;gap:14px;margin:28px auto 0;padding:15px;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:16px;max-width:680px}
+.resume-card-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:12px;background:var(--surface-3);color:var(--green-light)}
+.resume-card-content{min-width:0;flex:1;display:flex;flex-direction:column;gap:3px}
+.resume-label{margin:0;color:var(--green);font-size:10px;font-weight:900;letter-spacing:.12em}
+.resume-card-content strong{color:var(--white);font-size:15px}.resume-card-content span{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.resume-button{flex-shrink:0;padding:10px 13px;border:0;border-radius:10px;background:var(--green);color:#08100b;font-weight:800}
+.known-surah{display:flex;align-items:center;gap:10px;width:max-content;max-width:100%;margin-top:13px;padding:10px 12px;border:1px solid var(--border);border-radius:11px;background:var(--surface);color:var(--muted);font-size:13px;cursor:pointer}
+.known-surah input{width:18px;height:18px;margin:0;accent-color:var(--green);cursor:pointer}
+.sourate-known{display:inline-flex;align-items:center;margin-left:7px;padding:3px 6px;border-radius:7px;background:rgba(121,200,154,.12);color:var(--green-light);font-size:10px;font-weight:800}
+.mini-player{position:fixed;left:50%;bottom:14px;z-index:900;width:min(680px,calc(100% - 24px));transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:10px 11px;background:rgba(18,26,22,.96);border:1px solid var(--border);border-radius:16px;box-shadow:0 14px 45px rgba(0,0,0,.35);backdrop-filter:blur(14px)}
+.mini-player-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}.mini-player-label{color:var(--green);font-size:9px;font-weight:900;letter-spacing:.1em}.mini-player-info strong{color:var(--white);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mini-player-info span:last-child{color:var(--muted);font-size:11px}
+.mini-player-button,.mini-player-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--border);border-radius:10px;background:var(--surface-2);color:var(--text)}.mini-play-button{background:var(--green);border-color:var(--green);color:#07100a;font-weight:800}.mini-player-close{font-size:20px;color:var(--muted)}
+@media(max-width:600px){.resume-card{align-items:flex-start}.resume-button{margin-left:auto}.mini-player{bottom:calc(10px + env(safe-area-inset-bottom));width:calc(100% - 16px)}.known-surah{width:100%}}
+</style>
+
 </head>
 
 <body>
@@ -130,6 +147,16 @@ id="brandHome"
     qui t'interpellent.
   </p>
 
+
+  <div class="resume-card" id="resumeCard" hidden>
+    <div class="resume-card-icon">▶️</div>
+    <div class="resume-card-content">
+      <p class="resume-label">TA DERNIÈRE LECTURE</p>
+      <strong id="resumeTitle">Reprendre ma lecture</strong>
+      <span id="resumeDetails">Dernière position sauvegardée</span>
+    </div>
+    <button class="resume-button" id="resumeButton" type="button">▶️ Reprendre</button>
+  </div>
 
   <div class="home-buttons">
 
@@ -229,6 +256,24 @@ id="brandHome"
     type="button"
   >
     🕌 Médinoises
+  </button>
+
+
+  <button
+    class="filter-button"
+    data-filter="known"
+    type="button"
+  >
+    ✓ Connues
+  </button>
+
+
+  <button
+    class="filter-button"
+    data-filter="unknown"
+    type="button"
+  >
+    📖 À apprendre
   </button>
 
 </div>
@@ -382,6 +427,11 @@ id="brandHome"
     class="reader-info"
     id="readerInfo"
   ></p>
+
+  <label class="known-surah">
+    <input type="checkbox" id="knownSurahCheckbox">
+    <span>Je connais déjà cette sourate</span>
+  </label>
 
 </div>
 
@@ -544,6 +594,17 @@ id="brandHome"
 
 </main>
 
+<div class="mini-player" id="miniPlayer" hidden>
+  <div class="mini-player-info">
+    <span class="mini-player-label">🎧 LECTURE EN COURS</span>
+    <strong id="miniPlayerTitle">Sourate</strong>
+    <span id="miniPlayerVerse">Verset 1</span>
+  </div>
+  <button class="mini-player-button" id="miniRestartButton" type="button" title="Recommencer le verset">↺</button>
+  <button class="mini-player-button mini-play-button" id="miniPlayButton" type="button" title="Lecture / pause">▶️</button>
+  <button class="mini-player-close" id="miniCloseButton" type="button" title="Masquer le lecteur">×</button>
+</div>
+
 <!-- =====================================================
      MODALE DOSSIER
 ====================================================== -->
@@ -659,11 +720,117 @@ let readerReturnView = "sourates";
 
 
 /* =====================================================
+   PROGRESSION / SOURATES CONNUES
+===================================================== */
+
+function loadReadingState() {
+  try {
+    const saved = localStorage.getItem(READING_STORAGE_KEY);
+    if (!saved) return null;
+    const parsed = JSON.parse(saved);
+    if (!parsed || !Number.isInteger(parsed.surahNumber)) return null;
+    return parsed;
+  } catch (error) {
+    console.error("Erreur progression :", error);
+    return null;
+  }
+}
+
+function saveReadingState(force = false) {
+  if (!currentSourate || !currentAyahs.length) return;
+  const now = Date.now();
+  if (!force && now - lastReadingSave < 1000) return;
+  lastReadingSave = now;
+  readingState = {
+    surahNumber: currentSourate.number,
+    ayahIndex: currentAyahIndex,
+    ayahNumber: currentAyahs[currentAyahIndex]?.numberInSurah || 1,
+    audioTime: Number.isFinite(audioPlayer.currentTime) ? audioPlayer.currentTime : 0,
+    displayMode: currentDisplayMode,
+    savedAt: now
+  };
+  try { localStorage.setItem(READING_STORAGE_KEY, JSON.stringify(readingState)); }
+  catch (error) { console.error("Impossible de sauvegarder la progression :", error); }
+}
+
+function loadKnownSourates() {
+  try {
+    const saved = localStorage.getItem(KNOWN_STORAGE_KEY);
+    if (!saved) return [];
+    const parsed = JSON.parse(saved);
+    return Array.isArray(parsed) ? parsed.map(Number).filter(Number.isInteger) : [];
+  } catch (error) {
+    console.error("Erreur sourates connues :", error);
+    return [];
+  }
+}
+
+function saveKnownSourates() {
+  try { localStorage.setItem(KNOWN_STORAGE_KEY, JSON.stringify(knownSourates)); }
+  catch (error) { console.error("Impossible de sauvegarder les sourates connues :", error); }
+}
+
+function isSourateKnown(number) { return knownSourates.includes(Number(number)); }
+
+function setSourateKnown(number, known) {
+  number = Number(number);
+  if (known && !knownSourates.includes(number)) knownSourates.push(number);
+  if (!known) knownSourates = knownSourates.filter(item => item !== number);
+  saveKnownSourates();
+  if (Array.isArray(sourates) && sourates.length) displaySourates();
+}
+
+function updateResumeCard() {
+  if (!resumeCard) return;
+  if (!readingState || !Number.isInteger(readingState.surahNumber)) {
+    resumeCard.hidden = true;
+    return;
+  }
+  const name = frenchNames[readingState.surahNumber] || `Sourate ${readingState.surahNumber}`;
+  resumeTitle.textContent = name;
+  resumeDetails.textContent = `Verset ${readingState.ayahNumber || 1}${readingState.displayMode ? " • " + ({both:"Arabe + Français",arabic:"Arabe",french:"Français",phonetic:"Phonétique"}[readingState.displayMode] || "") : ""}`;
+  resumeCard.hidden = false;
+}
+
+function updateMiniPlayer() {
+  if (!miniPlayer || !currentSourate || !currentAyahs.length || miniPlayerHidden) return;
+  miniPlayerTitle.textContent = frenchNames[currentSourate.number] || currentSourate.englishName;
+  miniPlayerVerse.textContent = `Verset ${currentAyahs[currentAyahIndex]?.numberInSurah || 1} / ${currentAyahs.length}`;
+  miniPlayButton.textContent = audioPlayer.paused ? "▶️" : "⏸️";
+  miniPlayer.hidden = false;
+}
+
+function hideMiniPlayer() {
+  miniPlayerHidden = true;
+  miniPlayer.hidden = true;
+}
+
+function restoreDisplayMode(mode) {
+  if (!mode) return;
+  const button = document.querySelector(`.display-button[data-mode="${mode}"]`);
+  if (!button) return;
+  document.querySelectorAll(".display-button").forEach(btn => btn.classList.remove("active"));
+  button.classList.add("active");
+  currentDisplayMode = mode;
+}
+
+/* =====================================================
    DOSSIERS
 ===================================================== */
 
 const FOLDERS_STORAGE_KEY =
   "mon-coran-dossiers";
+
+const READING_STORAGE_KEY =
+  "mon-coran-reading";
+
+const KNOWN_STORAGE_KEY =
+  "mon-coran-known-sourates";
+
+let readingState = loadReadingState();
+let knownSourates = loadKnownSourates();
+let miniPlayerHidden = false;
+let lastReadingSave = 0;
 
 
 let folders =
@@ -1886,6 +2053,67 @@ const quickFolderName =
     "quickFolderName"
   );
 
+const resumeCard = document.getElementById("resumeCard");
+const resumeTitle = document.getElementById("resumeTitle");
+const resumeDetails = document.getElementById("resumeDetails");
+const resumeButton = document.getElementById("resumeButton");
+const knownSurahCheckbox = document.getElementById("knownSurahCheckbox");
+const miniPlayer = document.getElementById("miniPlayer");
+const miniPlayerTitle = document.getElementById("miniPlayerTitle");
+const miniPlayerVerse = document.getElementById("miniPlayerVerse");
+const miniPlayButton = document.getElementById("miniPlayButton");
+const miniRestartButton = document.getElementById("miniRestartButton");
+const miniCloseButton = document.getElementById("miniCloseButton");
+
+
+/* =====================================================
+   PROGRESSION / MINI LECTEUR
+===================================================== */
+
+knownSurahCheckbox.addEventListener("change", () => {
+  if (currentSourate) setSourateKnown(currentSourate.number, knownSurahCheckbox.checked);
+});
+
+resumeButton.addEventListener("click", () => {
+  if (!readingState) return;
+  readerReturnView = "sourates";
+  openSourate(readingState.surahNumber).then(() => {
+    const index = Math.min(readingState.ayahIndex || 0, Math.max(0, currentAyahs.length - 1));
+    currentAyahIndex = index;
+    loadCurrentAyah(Number(readingState.audioTime || 0));
+    setTimeout(() => {
+      const current = document.querySelector(`.ayah[data-index="${index}"]`);
+      if (current) current.scrollIntoView({behavior:"smooth", block:"center"});
+    }, 150);
+  });
+});
+
+miniPlayButton.addEventListener("click", () => {
+  if (audioPlayer.paused) playAudio();
+  else pauseAudio();
+});
+
+miniRestartButton.addEventListener("click", () => {
+  audioPlayer.currentTime = 0;
+  saveReadingState(true);
+  playAudio();
+});
+
+miniCloseButton.addEventListener("click", hideMiniPlayer);
+
+audioPlayer.addEventListener("timeupdate", () => {
+  saveReadingState(false);
+  updateMiniPlayer();
+});
+
+audioPlayer.addEventListener("play", updateMiniPlayer);
+audioPlayer.addEventListener("pause", () => {
+  saveReadingState(true);
+  updateMiniPlayer();
+});
+
+window.addEventListener("pagehide", () => saveReadingState(true));
+window.addEventListener("beforeunload", () => saveReadingState(true));
 
 /* =====================================================
    NAVIGATION
@@ -1906,10 +2134,9 @@ function showHome() {
     true;
 
 
-  window.scrollTo(
-    0,
-    0
-  );
+  updateResumeCard();
+  updateMiniPlayer();
+  window.scrollTo(0,0);
 
 }
 
@@ -1929,10 +2156,8 @@ function showSourates() {
     true;
 
 
-  window.scrollTo(
-    0,
-    0
-  );
+  updateMiniPlayer();
+  window.scrollTo(0,0);
 
 }
 
@@ -2154,6 +2379,15 @@ function displaySourates() {
   }
 
 
+  if (filter === "known") {
+    filtered = filtered.filter(sourate => isSourateKnown(sourate.number));
+  }
+
+  if (filter === "unknown") {
+    filtered = filtered.filter(sourate => !isSourateKnown(sourate.number));
+  }
+
+
   if (
     sort ===
     "length"
@@ -2331,6 +2565,7 @@ function createSourateCard(
         •
         ${sourate.numberOfAyahs}
         versets
+        ${isSourateKnown(sourate.number) ? '<span class="sourate-known">✓ Connue</span>' : ''}
 
       </span>
 
@@ -2380,6 +2615,7 @@ async function openSourate(
   number
 ) {
 
+  miniPlayerHidden = false;
   showReaderLoading();
 
 
@@ -2501,8 +2737,12 @@ async function openSourate(
       );
 
 
-    currentAyahIndex =
-      0;
+    const isResumingSameSurah =
+      readingState && readingState.surahNumber === number;
+
+    currentAyahIndex = isResumingSameSurah
+      ? Math.min(readingState.ayahIndex || 0, Math.max(0, currentAyahs.length - 1))
+      : 0;
 
 
     readerNumber.textContent =
@@ -2528,6 +2768,9 @@ async function openSourate(
         currentSourate.numberOfAyahs
       } versets`;
 
+    knownSurahCheckbox.checked = isSourateKnown(number);
+    restoreDisplayMode(isResumingSameSurah ? readingState.displayMode : "both");
+
 
     readerBismillah.hidden =
       number === 9;
@@ -2536,11 +2779,13 @@ async function openSourate(
     renderAyahs();
 
 
-    loadCurrentAyah();
-
+    loadCurrentAyah(isResumingSameSurah ? Number(readingState.audioTime || 0) : 0);
 
     audioStatus.textContent =
       "Prêt à écouter";
+
+    updateMiniPlayer();
+    updateResumeCard();
 
 
   } catch (error) {
@@ -2918,7 +3163,7 @@ function renderAyahs() {
 
           currentAyahIndex =
             index;
-
+          saveReadingState(true);
 
           loadCurrentAyah();
 
@@ -2943,7 +3188,7 @@ function renderAyahs() {
    AUDIO
 ===================================================== */
 
-function loadCurrentAyah() {
+function loadCurrentAyah(restoreTime = 0) {
 
   if (
     !currentAyahs.length
@@ -2972,6 +3217,14 @@ function loadCurrentAyah() {
 
   }
 
+
+  audioPlayer.addEventListener("loadedmetadata", function restorePosition() {
+    audioPlayer.removeEventListener("loadedmetadata", restorePosition);
+    if (restoreTime > 0 && Number.isFinite(restoreTime)) {
+      try { audioPlayer.currentTime = Math.min(restoreTime, Math.max(0, audioPlayer.duration - 0.1)); } catch (error) {}
+    }
+    saveReadingState(true);
+  });
 
   audioPlayer.load();
 
@@ -3011,6 +3264,7 @@ function loadCurrentAyah() {
 
   audioStatus.textContent =
     `Verset ${ayah.numberInSurah} / ${currentAyahs.length}`;
+  updateMiniPlayer();
 
 }
 
@@ -3031,6 +3285,8 @@ function playAudio() {
 
         playButton.textContent =
           "⏸️ Pause";
+        saveReadingState(true);
+        updateMiniPlayer();
 
       }
     )
@@ -3052,6 +3308,8 @@ function pauseAudio() {
 
   playButton.textContent =
     "▶️ Lire";
+  saveReadingState(true);
+  updateMiniPlayer();
 
 }
 
@@ -3082,7 +3340,7 @@ restartButton.addEventListener(
 
     audioPlayer.currentTime =
       0;
-
+    saveReadingState(true);
     playAudio();
 
   }
@@ -3116,7 +3374,7 @@ audioPlayer.addEventListener(
     ) {
 
       currentAyahIndex++;
-
+      saveReadingState(true);
 
       loadCurrentAyah();
 
@@ -3135,7 +3393,7 @@ audioPlayer.addEventListener(
 
       currentAyahIndex =
         0;
-
+      saveReadingState(true);
 
       loadCurrentAyah();
 
@@ -3154,6 +3412,8 @@ audioPlayer.addEventListener(
 
     audioStatus.textContent =
       "Sourate terminée";
+    saveReadingState(true);
+    updateMiniPlayer();
 
   }
 );
@@ -3194,7 +3454,7 @@ document
           currentDisplayMode =
             button.dataset.mode;
 
-
+          saveReadingState(true);
           renderAyahs();
 
 
@@ -3366,8 +3626,7 @@ document
     "click",
     () => {
 
-      audioPlayer.pause();
-
+      saveReadingState(true);
 
       if (
         readerReturnView ===
@@ -3623,7 +3882,7 @@ if (
 ===================================================== */
 
 renderFolders();
-
+updateResumeCard();
 loadSourates();
 
 </script>
